@@ -558,6 +558,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 2fabf0654ed4cdc4dbce691162104c2b, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 9078bcf864026b749a6a7d7bdf31fe41, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -707,6 +711,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1515635823928776092, guid: 2eb755df189cad04eb9bc7d4e24e7caf, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 6194903305530862502, guid: 2eb755df189cad04eb9bc7d4e24e7caf, type: 3}
       propertyPath: m_Name
       value: Player
