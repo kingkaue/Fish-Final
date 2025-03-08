@@ -5,12 +5,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    Animator animator;
     public float speed;
     private Vector2 move;
     private Vector2 mouseLook;
     private Vector2 joystickLook;
     private Vector3 rotationTarget;
     public bool isPC;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -59,6 +65,11 @@ public class PlayerMovement : MonoBehaviour
                 MovePlayerWithAim();
             }
         }
+
+        if(move == Vector2.zero)
+        {
+            animator.SetBool("IsRunning", false);
+        }
     }
 
     // Movement and rotation handled by left joystick
@@ -69,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         if (movement != Vector3.zero)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
+            animator.SetBool("IsRunning", true);
         }
 
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
