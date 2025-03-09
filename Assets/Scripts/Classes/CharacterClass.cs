@@ -5,7 +5,6 @@ public class CharacterClass : MonoBehaviour
     [Header ("Class Stats")]
     public string className;
     public int maxHealth;
-    public int currentHealth;
     public float moveSpeed;
     public float attackDamage;
 

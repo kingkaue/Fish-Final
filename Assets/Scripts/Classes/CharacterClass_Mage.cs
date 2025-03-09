@@ -17,7 +17,7 @@ public class CharacterClass_Mage : CharacterClass
         // Initializing class stats
         className = "Mage";
         maxHealth = 150;
-        currentHealth = maxHealth;
+        GetComponent<PlayerManager>().currentHealth = maxHealth;
         moveSpeed = 8;
         attackDamage = 10;
         playerInput = GetComponent<PlayerInput>();
