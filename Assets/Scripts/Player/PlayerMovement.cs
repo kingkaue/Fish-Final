@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mouseLook;
     private Vector2 joystickLook;
     private Vector3 rotationTarget;
-    public Vector3 lookPos;
+    public Vector3 aimDirection;
     public bool isPC;
 
     private void Start()
@@ -92,11 +92,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isPC)
         {
-            lookPos = rotationTarget - transform.position;
+            var lookPos = rotationTarget - transform.position;
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
 
-            Vector3 aimDirection = new Vector3(rotationTarget.x, 0f, rotationTarget.z);
+            aimDirection = new Vector3(rotationTarget.x, 0f, rotationTarget.z);
 
             if (aimDirection != Vector3.zero)
             {
@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Vector3 aimDirection = new Vector3(joystickLook.x, 0f, joystickLook.y);
+            aimDirection = new Vector3(joystickLook.x, 0f, joystickLook.y);
 
             if (aimDirection != Vector3.zero)
             {

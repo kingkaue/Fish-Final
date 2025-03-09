@@ -33,6 +33,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "BasicAttack_mouse",
+                    "type": "Button",
+                    "id": "46e45239-4905-477f-8017-6f3c0e3f9029",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BasicAttack_joystick",
+                    "type": "Value",
+                    "id": "6c829952-6770-44b3-a1d7-8d625b5d08ce",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
@@ -81,15 +99,6 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "BasicAttack_mouse",
-                    "type": "Button",
-                    "id": "46e45239-4905-477f-8017-6f3c0e3f9029",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -413,6 +422,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "BasicAttack_mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9495f77f-f2b0-4934-be38-c195e06824ce",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BasicAttack_joystick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
