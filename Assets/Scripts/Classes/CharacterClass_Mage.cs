@@ -14,6 +14,7 @@ public class CharacterClass_Mage : CharacterClass
 
     void Start()
     {
+        // Initializing class stats
         className = "Mage";
         maxHealth = 150;
         currentHealth = maxHealth;
@@ -21,6 +22,7 @@ public class CharacterClass_Mage : CharacterClass
         attackDamage = 10;
         playerInput = GetComponent<PlayerInput>();
 
+        // Gets basic attack inputs from input system
         if (isPC)
         {
             basicAttack = playerInput.actions["BasicAttack_mouse"];
@@ -40,6 +42,7 @@ public class CharacterClass_Mage : CharacterClass
     {
         if (isPC)
         {
+            // Shoots when holding down LMB
             if (basicAttack.ReadValue<float>() != 0 && Time.time >= nextFireTime)
             {
                 ShootBubble();
@@ -49,6 +52,7 @@ public class CharacterClass_Mage : CharacterClass
         }
         else
         {
+            // Shoots when aiming with right joystick
             if (basicAttack.ReadValue<Vector2>() != Vector2.zero && Time.time >= nextFireTime)
             {
                 ShootBubble();
@@ -63,17 +67,19 @@ public class CharacterClass_Mage : CharacterClass
 
         if (isPC)
         {
+            // Shoots in direction of mouse
             aim = GetComponent<PlayerMovement>().aimDirection;
             direction = (aim - bubbleOrigin.position).normalized;
         }
         else
         {
+            // Shoots in direction of joystick
             Vector2 joystickInput = basicAttack.ReadValue<Vector2>();
             direction = new Vector3(joystickInput.x, 0f, joystickInput.y).normalized;
         }
 
+        // Bullet shoots at set direction at speed
         GameObject bubble = Instantiate(bubblePrefab, bubbleOrigin.position, Quaternion.identity);
-
         Rigidbody bubbleRb = bubble.GetComponent<Rigidbody>();
         bubbleRb.linearVelocity = direction * bubbleSpeed;
         Debug.Log("Bubble Speed is " + bubbleRb.linearVelocity);
