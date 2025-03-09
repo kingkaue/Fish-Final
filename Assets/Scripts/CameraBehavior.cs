@@ -22,7 +22,7 @@ public class CameraBehavior : MonoBehaviour
         {
             Vector3 targetPosition = player.position + CamOffset;
 
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+            transform.position = targetPosition;
 
             transform.LookAt(player);
         }

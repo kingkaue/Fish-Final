@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mouseLook;
     private Vector2 joystickLook;
     private Vector3 rotationTarget;
+    public Vector3 lookPos;
     public bool isPC;
 
     private void Start()
@@ -91,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isPC)
         {
-            var lookPos = rotationTarget - transform.position;
+            lookPos = rotationTarget - transform.position;
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
 
