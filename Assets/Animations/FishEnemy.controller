@@ -28,7 +28,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 98f33b024d54_23ce03e60142_T_POSING_FISH_ENEMY
+  m_Name: FishEnemy
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:

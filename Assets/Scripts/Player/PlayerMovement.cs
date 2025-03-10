@@ -95,7 +95,6 @@ public class PlayerMovement : MonoBehaviour
             var lookPos = rotationTarget - transform.position;
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
-
             aimDirection = new Vector3(rotationTarget.x, 0f, rotationTarget.z);
 
             if (aimDirection != Vector3.zero)
@@ -115,6 +114,16 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = new Vector3(move.x, 0f, move.y);
 
+        if (movement != Vector3.zero)
+        {
+            animator.SetBool("IsRunning", true);  // <-- Ensure animation plays
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
+        }
+
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
     }
+
 }
