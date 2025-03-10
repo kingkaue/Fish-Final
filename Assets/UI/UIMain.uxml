@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:ProgressBar value="22" title="Level Progress" name="Level" style="top: 1%; height: auto; border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; border-top-right-radius: 3px; border-top-width: 6px; border-right-width: 6px; border-bottom-width: 6px; border-left-width: 6px; -unity-background-image-tint-color: rgb(255, 0, 0); background-color: rgba(200, 46, 46, 0); margin-top: -3px; margin-right: 4px; margin-bottom: -3px; margin-left: 4px; padding-top: 0; padding-right: 3px; padding-bottom: 0; padding-left: 3px; -unity-text-align: upper-center; color: rgb(0, 0, 0); -unity-font-style: bold;">
+        <Bindings>
+            <ui:DataBinding property="value" binding-mode="ToTarget" />
+        </Bindings>
+    </ui:ProgressBar>
+    <ui:VisualElement style="flex-grow: 1; position: absolute; height: 80px; width: 619px; top: 849px; left: 10px; justify-content: flex-start; align-items: flex-start; background-color: rgb(224, 214, 214); background-image: url(&quot;project://database/Assets/UI/blehh.png?fileID=2800000&amp;guid=9c1fa2db54e003445b596e28861d7f13&amp;type=3#blehh&quot;); background-repeat: no-repeat no-repeat;" />
+    <ui:Label text="Inventory" style="width: 201px; height: 44px; font-size: 30px; -unity-font-style: bold; position: absolute; top: 799px; left: 12px;" />
+    <ui:Label text="02:49" style="position: absolute; height: 35px; width: 70px; top: 43px; left: 813px; font-size: 30px; -unity-font-style: bold;" />
+</ui:UXML>
