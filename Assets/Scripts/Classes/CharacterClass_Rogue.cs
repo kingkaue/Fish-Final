@@ -1,28 +1,29 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterClass_Mage : CharacterClass
+public class CharacterClass_Rogue : CharacterClass
 {
-    [SerializeField] GameObject bubblePrefab;
-    [SerializeField] Transform bubbleOrigin;
-    public float bubbleSpeed = 5f;
-    public float fireRate = 0.5f;
+    [SerializeField] GameObject daggerPrefab;
+    [SerializeField] Transform daggerOrigin;
+    public float daggerSpeed = 7f;
+    public float fireRate = 0.7f;
+    public int numDaggers = 2;
 
     private float nextFireTime = 0f;
     private PlayerInput playerInput;
     private InputAction basicAttack;
+    private Vector3 direction;
 
-    void Start()
+    private void Start()
     {
-        // Initializing class stats
-        className = "Mage";
-        maxHealth = 150;
+        className = "Rogue";
+        maxHealth = 200;
         GetComponent<PlayerManager>().currentHealth = maxHealth;
-        moveSpeed = 8;
-        attackDamage = 10;
+        moveSpeed = 10;
+        attackDamage = 8;
         playerInput = GetComponent<PlayerInput>();
 
-        // Gets basic attack inputs from input system
         if (isPC)
         {
             basicAttack = playerInput.actions["BasicAttack_mouse"];
@@ -33,19 +34,17 @@ public class CharacterClass_Mage : CharacterClass
         }
     }
 
-    void Update()
+    private void Update()
     {
         Attack();
     }
-
-    void Attack()
+    private void Attack()
     {
         if (isPC)
         {
-            // Shoots when holding down LMB
             if (basicAttack.ReadValue<float>() != 0 && Time.time >= nextFireTime)
             {
-                ShootBubble();
+                ShootDaggers();
                 nextFireTime = Time.time + fireRate;
                 Debug.Log("Shooting bubble towards " + aim.x + " " + aim.z);
             }
@@ -55,21 +54,19 @@ public class CharacterClass_Mage : CharacterClass
             // Shoots when aiming with right joystick
             if (basicAttack.ReadValue<Vector2>() != Vector2.zero && Time.time >= nextFireTime)
             {
-                ShootBubble();
+                ShootDaggers();
                 nextFireTime = Time.time + fireRate;
             }
         }
     }
 
-    private void ShootBubble()
+    private void ShootDaggers()
     {
-        Vector3 direction;
-
         if (isPC)
         {
             // Shoots in direction of mouse
             aim = GetComponent<PlayerMovement>().aimDirection;
-            direction = (aim - bubbleOrigin.position).normalized;
+            direction = (aim - daggerOrigin.position).normalized;
         }
         else
         {
@@ -78,11 +75,18 @@ public class CharacterClass_Mage : CharacterClass
             direction = new Vector3(joystickInput.x, 0f, joystickInput.y).normalized;
         }
 
-        // Bullet shoots at set direction at speed
-        GameObject bubble = Instantiate(bubblePrefab, bubbleOrigin.position, Quaternion.identity);
-        Rigidbody bubbleRb = bubble.GetComponent<Rigidbody>();
-        bubbleRb.linearVelocity = direction * bubbleSpeed;
-        Debug.Log("Bubble Speed is " + bubbleRb.linearVelocity);
-        Debug.Log("Bubble Direction is " + direction);
+        for (int i = 0; i < numDaggers; i++)
+        {
+            GameObject dagger = Instantiate(daggerPrefab, daggerOrigin.position, Quaternion.identity);
+            Rigidbody daggerRb = dagger.GetComponent<Rigidbody>();
+           daggerRb.linearVelocity = GetDaggerDirection(numDaggers) * daggerSpeed;
+        }
+    }
+
+    Vector3 GetDaggerDirection(int numOfDaggers)
+    {
+        Vector3 targetDir = direction;
+        targetDir = new Vector3(targetDir.x + Random.Range(-3f, 3), 0f, targetDir.z + Random.Range(-3f, 3));
+        return targetDir;
     }
 }
