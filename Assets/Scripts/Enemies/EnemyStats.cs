@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 public class EnemyStats : MonoBehaviour
 {
     [SerializeField] private float _maxHealth = 3;
@@ -18,6 +19,7 @@ public class EnemyStats : MonoBehaviour
         {
             _currentHealth = Mathf.Max(_currentHealth - 1, 0); // Ensure health doesn't go below 0
             _healthbar.UpdateHealthBar(_maxHealth, _currentHealth); // Update health bar
+            Debug.Log("Projectile Collision With Enemy");
         }
     }
 }

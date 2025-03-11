@@ -3,19 +3,21 @@ using UnityEngine.UI;
 
 public class HealthBarScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Image _healthbarimage;
-    [SerializeField] private float _reduceSpeed = 2.0f;
+    [SerializeField] private float _reduceSpeed = 5.0f; // Increased reduce speed for visible update
     private Camera _cam;
-    private float _target = 1; 
+    private float _target = 1;
 
     private void Start()
     {
         _cam = Camera.main;
+        _healthbarimage.fillAmount = 1; // Start with a full health bar
     }
+
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
         _target = currentHealth / maxHealth;
+        Debug.Log("Health bar target updated: " + _target); // Log the target value
     }
 
     private void Update()
