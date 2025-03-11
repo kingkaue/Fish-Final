@@ -1465,7 +1465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1332968602155121683, guid: 458ac2ef40895a14facf67d6416636c6, type: 3}
       propertyPath: _reduceSpeed
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2871721963453175347, guid: 458ac2ef40895a14facf67d6416636c6, type: 3}
       propertyPath: m_IsTrigger
