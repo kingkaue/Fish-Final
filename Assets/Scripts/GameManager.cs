@@ -4,6 +4,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab, EnemyPrefab;
     GameObject enemyParent;
+    float timer;
+    int xp;
 
 
     private void Awake()
@@ -27,7 +29,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        //Debug.Log(timer);
     }
 
     void SpawnPlayer()
@@ -60,6 +63,11 @@ public class GameManager : MonoBehaviour
             cubes[i].transform.parent = cubeParent.transform;
             cubes[i].transform.position = new Vector3(Random.Range(-20f, 20f), 0.5f, Random.Range(-20f, 20f));
         }
+    }
+
+    void AddXP(int amount)
+    {
+        xp += amount;
     }
 
     //track character selection
