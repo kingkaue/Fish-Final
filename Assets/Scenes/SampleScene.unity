@@ -1353,8 +1353,8 @@ MonoBehaviour:
   daggerOrigin: {fileID: 281976373}
   daggerSpeed: 15
   fireRate: 0.7
-  numDaggers: 2
-  spreadAngle: 45
+  numDaggers: 4
+  spreadAngle: 30
 --- !u!4 &2024691875 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8899350227416667334, guid: 9a4999648dfb36347a8d514d7cb951a4, type: 3}
