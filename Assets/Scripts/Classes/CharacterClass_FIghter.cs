@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 using System.Collections;
 
 public class CharacterClass_FIghter : CharacterClass
@@ -11,6 +10,8 @@ public class CharacterClass_FIghter : CharacterClass
     private float nextFireTime = 0f;
     public float fireRate = 0.7f;
     Animator animator;
+    public GameObject RightFistHitbox;
+    public GameObject LeftFistHitbox;
 
     private void Start()
     {
@@ -49,27 +50,33 @@ public class CharacterClass_FIghter : CharacterClass
     {
         if (isPC)
         {
-            // Shoots if holding down LMB
-            if (basicAttack.ReadValue<float>() != 0 && Time.time >= nextFireTime)
+            // Check if the mouse button was clicked (not held)
+            if (basicAttack.triggered && Time.time >= nextFireTime)
             {
-                animator.SetBool("IsPunching", true);
-                nextFireTime = Time.time + fireRate;
+                StartCoroutine(ActivateHitBoxes());
                 StartCoroutine(ResetAttackAnimation());
             }
         }
         else
         {
-            // Shoots when aiming with right joystick
-            if (basicAttack.ReadValue<Vector2>() != Vector2.zero && Time.time >= nextFireTime)
+            // Check if the joystick button was pressed (not held)
+            if (basicAttack.triggered && Time.time >= nextFireTime)
             {
-                animator.SetBool("IsPunching", true);
-                nextFireTime = Time.time + fireRate;
+                StartCoroutine(ActivateHitBoxes());
                 StartCoroutine(ResetAttackAnimation());
             }
         }
-
     }
 
-
-
+    private IEnumerator ActivateHitBoxes()
+    {
+        animator.SetBool("IsPunching", true);
+        yield return new WaitForSeconds(0.5f); // Delay before activating hitboxes
+        RightFistHitbox.SetActive(true);
+        LeftFistHitbox.SetActive(true);
+        nextFireTime = Time.time + fireRate; // Update the next allowed attack time
+        yield return new WaitForSeconds(1f); // Duration of hitbox activation
+        RightFistHitbox.SetActive(false);
+        LeftFistHitbox.SetActive(false);
+    }
 }

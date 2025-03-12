@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7865049240109229567
 Transform:
   m_ObjectHideFlags: 0
@@ -84,7 +84,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1975904111024700007
 Transform:
   m_ObjectHideFlags: 0
@@ -460,6 +460,8 @@ MonoBehaviour:
   aim: {x: 0, y: 0, z: 0}
   isPC: 1
   fireRate: 0.7
+  RightFistHitbox: {fileID: 252166190446246463}
+  LeftFistHitbox: {fileID: 6890341751688200894}
 --- !u!114 &4617902058190554463
 MonoBehaviour:
   m_ObjectHideFlags: 0
