@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        // Checks first to see if player is playing rogue
         if (GetComponent<CharacterClass_Rogue>() != null)
         {
             if (canDash)
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Makes sure player can't do any inputs while dashing
         if (isDashing)
         {
             return;
@@ -104,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Makes sure player can't do any inputs while dashing
         if (isDashing)
         {
             return;
@@ -183,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
     // Only used for rogue class
     private IEnumerator Dash()
     {
+        // Gets variables from rogue script
         CharacterClass_Rogue rogueScript = GetComponent<CharacterClass_Rogue>();
         float dashSpeed = rogueScript.dashSpeed;
         float dashDuration = rogueScript.dashDuration;
@@ -194,9 +198,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 dashDirection = new Vector3(move.x, 0f, move.y).normalized;
         rb.linearVelocity = dashDirection * dashSpeed;
 
+        // Dashes for dashDuration amount of seconds
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
 
+        // Manages dash cooldown
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }

@@ -27,6 +27,7 @@ public class CharacterClass_Rogue : CharacterClass
 
     private void Start()
     {
+        // Setting basic stats
         className = "Rogue";
         maxHealth = 200;
         GetComponent<PlayerManager>().currentHealth = maxHealth;
@@ -34,6 +35,7 @@ public class CharacterClass_Rogue : CharacterClass
         attackDamage = 8;
         playerInput = GetComponent<PlayerInput>();
 
+        // Changes basic attack input control
         if (isPC)
         {
             basicAttack = playerInput.actions["BasicAttack_mouse"];
@@ -52,6 +54,7 @@ public class CharacterClass_Rogue : CharacterClass
     {
         if (isPC)
         {
+            // Shoots if holding down LMB
             if (basicAttack.ReadValue<float>() != 0 && Time.time >= nextFireTime)
             {
                 ShootDaggers();
@@ -90,17 +93,23 @@ public class CharacterClass_Rogue : CharacterClass
 
     private void ShootDaggersInDirection()
     {
+        // Equally spaces distance between daggers depending on number of daggers
         float angleBetweenDaggers = spreadAngle / (numDaggers - 1);
         float startAngle = -spreadAngle / 2;
         Quaternion originalRotation = daggerOrigin.rotation;
 
+        // Spawns each dagger
         for (int i = 0; i < numDaggers; i++)
         {
             float angle = startAngle + (angleBetweenDaggers * i);
+
+            // Shoots dagger at certain angle
             daggerOrigin.transform.Rotate(0, angle, 0);
             GameObject dagger = Instantiate(daggerPrefab, daggerOrigin.position, Quaternion.identity);
             Rigidbody daggerRb = dagger.GetComponent<Rigidbody>();
             daggerRb.AddForce(daggerOrigin.transform.forward * 500);
+
+            // Resets rotation of dagggerOrigin to work properly
             daggerOrigin.rotation = originalRotation;
         }
     }

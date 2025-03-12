@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2522013598657458060}
   - component: {fileID: 8549278071660943461}
   - component: {fileID: 4835762299771167704}
+  - component: {fileID: -7890742766781672513}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Projectile
@@ -135,8 +136,23 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!114 &-7890742766781672513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2486822060649500248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6d5f2b50020449b036704c6e52067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coreDamage: 3
+  splashDamageRadius: 4
+  splashDamage: 1
 --- !u!1001 &5926379665294300296
 PrefabInstance:
   m_ObjectHideFlags: 0
