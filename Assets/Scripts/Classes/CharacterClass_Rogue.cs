@@ -83,16 +83,16 @@ public class CharacterClass_Rogue : CharacterClass
     {
         float angleBetweenDaggers = spreadAngle / (numDaggers - 1);
         float startAngle = -spreadAngle / 2;
+        Quaternion originalRotation = daggerOrigin.rotation;
 
         for (int i = 0; i < numDaggers; i++)
         {
-            float angle = startAngle + angleBetweenDaggers * i;
-            Vector3 daggerDirection = Quaternion.Euler(0,0, angle) * direction;
-
+            float angle = startAngle + (angleBetweenDaggers * i);
+            daggerOrigin.transform.Rotate(0, angle, 0);
             GameObject dagger = Instantiate(daggerPrefab, daggerOrigin.position, Quaternion.identity);
             Rigidbody daggerRb = dagger.GetComponent<Rigidbody>();
-            daggerOrigin.transform.Rotate(0, angle, 0);
             daggerRb.AddForce(daggerOrigin.transform.forward * 500);
+            daggerOrigin.rotation = originalRotation;
         }
     }
 }
