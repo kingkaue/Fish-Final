@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using System.Collections;
 
 public class CharacterClass_FIghter : CharacterClass
 {
@@ -8,6 +10,7 @@ public class CharacterClass_FIghter : CharacterClass
     private InputAction basicAttack;
     private float nextFireTime = 0f;
     public float fireRate = 0.7f;
+    Animator animator;
 
     private void Start()
     {
@@ -18,6 +21,7 @@ public class CharacterClass_FIghter : CharacterClass
         moveSpeed = 10;
         attackDamage = 8;
         playerInput = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
 
         // Changes basic attack input control
         if (isPC)
@@ -35,6 +39,12 @@ public class CharacterClass_FIghter : CharacterClass
         Attack();
     }
 
+    private IEnumerator ResetAttackAnimation()
+    {
+        yield return new WaitForSeconds(0.1f); // Adjust the delay to match your animation
+        animator.SetBool("IsPunching", false);
+    }
+
     private void Attack()
     {
         if (isPC)
@@ -42,7 +52,9 @@ public class CharacterClass_FIghter : CharacterClass
             // Shoots if holding down LMB
             if (basicAttack.ReadValue<float>() != 0 && Time.time >= nextFireTime)
             {
-                
+                animator.SetBool("IsPunching", true);
+                nextFireTime = Time.time + fireRate;
+                StartCoroutine(ResetAttackAnimation());
             }
         }
         else
@@ -50,9 +62,12 @@ public class CharacterClass_FIghter : CharacterClass
             // Shoots when aiming with right joystick
             if (basicAttack.ReadValue<Vector2>() != Vector2.zero && Time.time >= nextFireTime)
             {
-
+                animator.SetBool("IsPunching", true);
+                nextFireTime = Time.time + fireRate;
+                StartCoroutine(ResetAttackAnimation());
             }
         }
+
     }
 
 
