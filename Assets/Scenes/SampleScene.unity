@@ -1351,9 +1351,10 @@ MonoBehaviour:
   isPC: 1
   daggerPrefab: {fileID: 9171458857002247564, guid: 4f09b23fe934ea843adf04222418d79b, type: 3}
   daggerOrigin: {fileID: 281976373}
-  daggerSpeed: 7
+  daggerSpeed: 15
   fireRate: 0.7
   numDaggers: 2
+  spreadAngle: 45
 --- !u!4 &2024691875 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8899350227416667334, guid: 9a4999648dfb36347a8d514d7cb951a4, type: 3}

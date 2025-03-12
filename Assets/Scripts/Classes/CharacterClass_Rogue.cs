@@ -9,6 +9,7 @@ public class CharacterClass_Rogue : CharacterClass
     public float daggerSpeed = 7f;
     public float fireRate = 0.7f;
     public int numDaggers = 2;
+    [SerializeField] float spreadAngle = 30f;
 
     private float nextFireTime = 0f;
     private PlayerInput playerInput;
@@ -75,18 +76,23 @@ public class CharacterClass_Rogue : CharacterClass
             direction = new Vector3(joystickInput.x, 0f, joystickInput.y).normalized;
         }
 
-        for (int i = 0; i < numDaggers; i++)
-        {
-            GameObject dagger = Instantiate(daggerPrefab, daggerOrigin.position, Quaternion.identity);
-            Rigidbody daggerRb = dagger.GetComponent<Rigidbody>();
-           daggerRb.linearVelocity = GetDaggerDirection(numDaggers) * daggerSpeed;
-        }
+        ShootDaggersInDirection();
     }
 
-    Vector3 GetDaggerDirection(int numOfDaggers)
+    private void ShootDaggersInDirection()
     {
-        Vector3 targetDir = direction;
-        targetDir = new Vector3(targetDir.x + Random.Range(-3f, 3), 0f, targetDir.z + Random.Range(-3f, 3));
-        return targetDir;
+        float angleBetweenDaggers = spreadAngle / (numDaggers - 1);
+        float startAngle = -spreadAngle / 2;
+
+        for (int i = 0; i < numDaggers; i++)
+        {
+            float angle = startAngle + angleBetweenDaggers * i;
+            Vector3 daggerDirection = Quaternion.Euler(0,0, angle) * direction;
+
+            GameObject dagger = Instantiate(daggerPrefab, daggerOrigin.position, Quaternion.identity);
+            Rigidbody daggerRb = dagger.GetComponent<Rigidbody>();
+            daggerOrigin.transform.Rotate(0, angle, 0);
+            daggerRb.AddForce(daggerOrigin.transform.forward * 500);
+        }
     }
 }
