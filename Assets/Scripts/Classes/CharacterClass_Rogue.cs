@@ -1,20 +1,29 @@
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CharacterClass_Rogue : CharacterClass
 {
+    [Header("Dagger Stats")]
     [SerializeField] GameObject daggerPrefab;
     [SerializeField] Transform daggerOrigin;
     public float daggerSpeed = 7f;
     public float fireRate = 0.7f;
     public int numDaggers = 2;
     [SerializeField] float spreadAngle = 30f;
-
+    
+    [Header("Character Stats")]
     private float nextFireTime = 0f;
     private PlayerInput playerInput;
     private InputAction basicAttack;
     private Vector3 direction;
+
+    [Header("Dash")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.25f;
+    public float dashCooldown = 1f;
 
     private void Start()
     {
