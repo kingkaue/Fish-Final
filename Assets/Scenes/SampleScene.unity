@@ -738,11 +738,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 786135343274949951, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: coreDamage
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 786135343274949951, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: knockbackForce
-      value: 50
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 786135343274949951, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: knockbackenemy
@@ -770,11 +770,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 863cac409d0f1e8459d56c709d46901a, type: 2}
     - target: {fileID: 6831929499539355887, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: coreDamage
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6831929499539355887, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: knockbackForce
-      value: 50
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 6831929499539355887, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: knockbackenemy
