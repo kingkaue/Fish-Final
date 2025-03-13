@@ -857,7 +857,7 @@ MonoBehaviour:
   coralPrefab: {fileID: 8449904179631587114, guid: d1df9956da235e14a8d32b06dac48d15, type: 3}
   player: {fileID: 648737005}
   targetPlane: {fileID: 496834112}
-  spawnRadius: 30
+  spawnRadius: 60
   despawnRadius: 60
   maxCoralsPerChunk: 30
   yPadding: 1

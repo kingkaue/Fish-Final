@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 public class CharacterClass_FIghter : CharacterClass
 {
@@ -12,9 +13,10 @@ public class CharacterClass_FIghter : CharacterClass
     Animator animator;
     public GameObject RightFistHitbox;
     public GameObject LeftFistHitbox;
-
+    private bool isswinging = false;
     private void Start()
     {
+       
         // Setting basic stats
         className = "Fighter";
 
@@ -58,27 +60,36 @@ public class CharacterClass_FIghter : CharacterClass
     {
         if (isPC)
         {
-            // Check if the mouse button was clicked (not held)
-            if (basicAttack.triggered && Time.time >= nextFireTime)
+            isswinging = true;
+            if (isswinging)
             {
-                StartCoroutine(ActivateHitBoxes());
-                StartCoroutine(ResetAttackAnimation());
+                // Check if the mouse button was clicked (not held)
+                if (basicAttack.triggered && Time.time >= nextFireTime)
+                {
+                    StartCoroutine(ActivateHitBoxes());
+                    StartCoroutine(ResetAttackAnimation());
+                }
             }
         }
         else
         {
+            isswinging = true;
             // Check if the joystick button was pressed (not held)
-            if (basicAttack.triggered && Time.time >= nextFireTime)
+            if (isswinging)
             {
-                StartCoroutine(ActivateHitBoxes());
-                StartCoroutine(ResetAttackAnimation());
+                // Check if the mouse button was clicked (not held)
+                if (basicAttack.triggered && Time.time >= nextFireTime)
+                {
+                    StartCoroutine(ActivateHitBoxes());
+                    StartCoroutine(ResetAttackAnimation());
+                }
             }
         }
     }
 
     private IEnumerator ActivateHitBoxes()
     {
-
+        
         animator.SetBool("IsPunching", true);
         RightFistHitbox.SetActive(true);
         LeftFistHitbox.SetActive(true);
@@ -86,5 +97,6 @@ public class CharacterClass_FIghter : CharacterClass
         yield return new WaitForSeconds(1f); // Duration of hitbox activation
         RightFistHitbox.SetActive(false);
         LeftFistHitbox.SetActive(false);
+        isswinging = false;
     }
 }
