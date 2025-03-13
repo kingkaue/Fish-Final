@@ -9,11 +9,11 @@ public class CharacterClass_FIghter : CharacterClass
     private PlayerInput playerInput;
     private InputAction basicAttack;
     private float nextFireTime = 0f;
-    public float fireRate = 2f;
+    public float fireRate = 5f;
     Animator animator;
     public GameObject RightFistHitbox;
     public GameObject LeftFistHitbox;
-    private bool canswing = true;
+    private bool canSwing = true;
     private void Start()
     {
 
@@ -48,7 +48,12 @@ public class CharacterClass_FIghter : CharacterClass
 
     void Update()
     {
-        Attack();
+        if (basicAttack.triggered && canSwing)
+        {
+            Attack();
+        }
+
+        //Debug.Log(canSwing);
     }
 
     private IEnumerator ResetAttackAnimation()
@@ -59,46 +64,34 @@ public class CharacterClass_FIghter : CharacterClass
 
     private void Attack()
     {
-        if (isPC)
-        {
-            if (basicAttack.triggered && Time.time >= nextFireTime)
-            {
-
-                if (canswing)
-                {
-                    StartCoroutine(ActivateHitBoxes());
-                    StartCoroutine(ResetAttackAnimation());
-                }
-            }
-        }
-        else
-        {
-            if (basicAttack.triggered && Time.time >= nextFireTime)
-            {
-
-                if (canswing)
-                {
-                    StartCoroutine(ActivateHitBoxes());
-                    StartCoroutine(ResetAttackAnimation());
-                }
-            }
-        }
+        StartCoroutine(ActivateHitBoxes());
+        StartCoroutine(ResetAttackAnimation());
     }
 
     private IEnumerator ActivateHitBoxes()
-    {
-        canswing = false;
+    { 
+        // start attack       
         animator.SetBool("IsPunching", true);
+        nextFireTime = Time.time + fireRate;
+        canSwing = false;
+        //Debug.Log("start attack");
+
+        // activate attack hitboxes at top of swing
         yield return new WaitForSeconds(.45f);
-        while (animator.GetBool("IsPunching"))
-        {
-            RightFistHitbox.SetActive(true);
-            LeftFistHitbox.SetActive(true);
-        }
-        nextFireTime = Time.time + fireRate; // Update the next allowed attack time
-        yield return new WaitForSeconds(fireRate); // Duration of hitbox activation
+        RightFistHitbox.SetActive(true);
+        LeftFistHitbox.SetActive(true);
+        //Debug.Log("hitbox active");
+        
+        // Deactivate hitboxes at bottom of swing
+        yield return new WaitForSeconds(.55f); // Duration of hitbox activation
         RightFistHitbox.SetActive(false);
         LeftFistHitbox.SetActive(false);
-        canswing = true;
+        //Debug.Log("disable hitbox");
+
+        // allow player to swing again once firerate cooldown is over
+        yield return new WaitForSeconds(fireRate - 1f);
+        canSwing = true;
+        //Debug.Log("end attack");
+        
     }
 }
