@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         Debug.Log("Player Health is " + currentHealth);
+        damageMultiplier = 1.0f;
     }
 
     // Update is called once per frame
@@ -44,7 +45,14 @@ public class PlayerManager : MonoBehaviour
     // Called in other scripts to change damage multiplier
     public void SetDamageMultiplier(float damageMultiplierAdd)
     {
-        damageMultiplier = damageMultiplier * damageMultiplierAdd;
+        if (damageMultiplier == 0)
+        {
+            damageMultiplier = 1f;
+        }
+        else
+        {
+            damageMultiplier = damageMultiplier * damageMultiplierAdd;
+        }
     }
 
     // Called in other scripts to change base damage
