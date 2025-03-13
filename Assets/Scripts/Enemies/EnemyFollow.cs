@@ -24,7 +24,11 @@ public class EnemyFollow : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<PlayerManager>().TakeDamage(10);
+            if (other.GetComponent<PlayerManager>().isInvincible == false)
+            {
+                other.GetComponent<PlayerManager>().TakeDamage(10);
+                Debug.Log("Dealt damage to player");
+            }
         }
     }
 }

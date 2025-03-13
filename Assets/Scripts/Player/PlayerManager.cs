@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -14,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     public float baseAttackDamage;
     public float attackDamage;
     public float damageMultiplier;
+    public bool isInvincible;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -114,5 +116,13 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth = currentHealth - damage;
+        StartCoroutine(InvincibilityFrames(0.25f));
+    }
+
+    private IEnumerator InvincibilityFrames(float duration)
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(duration);
+        isInvincible = false;
     }
 }
