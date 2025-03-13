@@ -27,12 +27,21 @@ public class CharacterClass_Rogue : CharacterClass
 
     private void Start()
     {
-        // Setting basic stats
+        // Setting base stats
         className = "Rogue";
-        maxHealth = 200;
-        GetComponent<PlayerManager>().currentHealth = maxHealth;
+
+        // Health and damage managed inside PlayerManager script so sets variables there
+        classBaseMaxHealth = 200f;
+        GetComponent<PlayerManager>().InitializeHealth(classBaseMaxHealth);
+
+
+        classBaseAttackDamage = 8;
+        GetComponent<PlayerManager>().baseAttackDamage = classBaseAttackDamage; // Sets class base damage as starting damage
+
+        // Speed managed in PlayerMovement script so sets variables there
         moveSpeed = 10;
-        attackDamage = 8;
+        GetComponent<PlayerMovement>().speed = moveSpeed;
+        
         playerInput = GetComponent<PlayerInput>();
 
         // Changes basic attack input control

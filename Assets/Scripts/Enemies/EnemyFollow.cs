@@ -24,8 +24,7 @@ public class EnemyFollow : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<PlayerManager>().currentHealth -= 10;
-            Debug.Log("Player health is at " + other.GetComponent<PlayerManager>().currentHealth);
+            other.GetComponent<PlayerManager>().TakeDamage(10);
         }
     }
 }

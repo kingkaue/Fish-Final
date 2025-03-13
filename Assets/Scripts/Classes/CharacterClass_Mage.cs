@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,10 +17,19 @@ public class CharacterClass_Mage : CharacterClass
     {
         // Initializing class stats
         className = "Mage";
-        maxHealth = 150;
-        GetComponent<PlayerManager>().currentHealth = maxHealth;
+
+        // Health and damage managed inside PlayerManager script so sets variables there
+        classBaseMaxHealth = 150;
+        GetComponent<PlayerManager>().InitializeHealth(classBaseMaxHealth);
+
+        classBaseAttackDamage = 10;
+        GetComponent<PlayerManager>().baseAttackDamage = classBaseAttackDamage; // Sets class base damage as starting damage
+        GetComponent<PlayerManager>().SetAttackDamage(1, classBaseAttackDamage);
+
+        // Speed managed in PlayerMovement script so sets variables there
         moveSpeed = 8;
-        attackDamage = 10;
+        GetComponent<PlayerMovement>().speed = moveSpeed;
+
         playerInput = GetComponent<PlayerInput>();
 
         // Gets basic attack inputs from input system

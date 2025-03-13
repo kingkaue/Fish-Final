@@ -4,9 +4,9 @@ public class CharacterClass : MonoBehaviour
 {
     [Header ("Class Stats")]
     public string className;
-    public int maxHealth;
+    public float classBaseMaxHealth;
     public float moveSpeed;
-    public float attackDamage;
+    public float classBaseAttackDamage;
 
     [Header ("Shooting")]
     public Vector3 aim;

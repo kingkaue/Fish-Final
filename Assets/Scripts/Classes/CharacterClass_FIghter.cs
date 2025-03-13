@@ -17,10 +17,18 @@ public class CharacterClass_FIghter : CharacterClass
     {
         // Setting basic stats
         className = "Fighter";
-        maxHealth = 250;
-        GetComponent<PlayerManager>().currentHealth = maxHealth;
+
+        // Health and damage managed inside PlayerManager script so sets variables there
+        classBaseMaxHealth = 250;
+        GetComponent<PlayerManager>().InitializeHealth(classBaseMaxHealth);
+        
+        classBaseAttackDamage = 8;
+        GetComponent<PlayerManager>().baseAttackDamage = classBaseAttackDamage; // Sets class base damage as starting damage
+
+        // Speed managed in PlayerMovement script so sets variables there
         moveSpeed = 10;
-        attackDamage = 8;
+        GetComponent<PlayerMovement>().speed = moveSpeed;
+
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
 
