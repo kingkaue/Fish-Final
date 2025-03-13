@@ -5,7 +5,7 @@ public class CoralSpawner : MonoBehaviour
     public GameObject coralPrefab; // Reference to the coral prefab
     public int numberOfCorals = 10; // Number of corals to spawn
     public Vector2 spawnArea = new Vector2(10, 10); // Area to spawn corals (X and Z dimensions)
-    public float yPadding = 0f; // Padding to ensure corals spawn on top of the plane
+    public float yPadding = 0.01f; // Small padding to ensure corals spawn on top of the plane
     public Transform targetPlane; // Assign the target plane in the Inspector
 
     private void Start()
