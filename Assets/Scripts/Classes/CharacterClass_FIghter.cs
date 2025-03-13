@@ -78,8 +78,8 @@ public class CharacterClass_FIghter : CharacterClass
 
     private IEnumerator ActivateHitBoxes()
     {
+
         animator.SetBool("IsPunching", true);
-        yield return new WaitForSeconds(0.5f); // Delay before activating hitboxes
         RightFistHitbox.SetActive(true);
         LeftFistHitbox.SetActive(true);
         nextFireTime = Time.time + fireRate; // Update the next allowed attack time

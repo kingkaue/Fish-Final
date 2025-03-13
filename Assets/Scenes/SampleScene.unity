@@ -587,7 +587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 786135343274949951, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: coreDamage
-      value: 4
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 786135343274949951, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: knockbackForce
@@ -619,7 +619,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 863cac409d0f1e8459d56c709d46901a, type: 2}
     - target: {fileID: 6831929499539355887, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: coreDamage
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6831929499539355887, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: knockbackForce
@@ -628,7 +628,7 @@ PrefabInstance:
     - target: {fileID: 6831929499539355887, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: knockbackenemy
       value: 
-      objectReference: {fileID: 257502094617183370, guid: 458ac2ef40895a14facf67d6416636c6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7105274834985291793, guid: 2a1893cad0e9f724198cceca8ec8c931, type: 3}
       propertyPath: m_Name
       value: Brawler
