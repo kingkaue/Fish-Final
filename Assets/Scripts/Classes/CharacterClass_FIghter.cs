@@ -16,14 +16,14 @@ public class CharacterClass_FIghter : CharacterClass
     private bool canswing = true;
     private void Start()
     {
-       
+
         // Setting basic stats
         className = "Fighter";
 
         // Health and damage managed inside PlayerManager script so sets variables there
         classBaseMaxHealth = 250;
         GetComponent<PlayerManager>().InitializeHealth(classBaseMaxHealth);
-        
+
         classBaseAttackDamage = 8;
         GetComponent<PlayerManager>().baseAttackDamage = classBaseAttackDamage; // Sets class base damage as starting damage
         GetComponent<PlayerManager>().SetAttackDamage(1, classBaseAttackDamage);
@@ -49,11 +49,6 @@ public class CharacterClass_FIghter : CharacterClass
     void Update()
     {
         Attack();
-        while (animator.GetBool("IsPunching"))
-        {
-            RightFistHitbox.SetActive(true);
-            LeftFistHitbox.SetActive(true);
-        }
     }
 
     private IEnumerator ResetAttackAnimation()
@@ -68,7 +63,7 @@ public class CharacterClass_FIghter : CharacterClass
         {
             if (basicAttack.triggered && Time.time >= nextFireTime)
             {
-           
+
                 if (canswing)
                 {
                     StartCoroutine(ActivateHitBoxes());
@@ -94,7 +89,12 @@ public class CharacterClass_FIghter : CharacterClass
     {
         canswing = false;
         animator.SetBool("IsPunching", true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(.45f);
+        while (animator.GetBool("IsPunching"))
+        {
+            RightFistHitbox.SetActive(true);
+            LeftFistHitbox.SetActive(true);
+        }
         nextFireTime = Time.time + fireRate; // Update the next allowed attack time
         yield return new WaitForSeconds(fireRate); // Duration of hitbox activation
         RightFistHitbox.SetActive(false);
