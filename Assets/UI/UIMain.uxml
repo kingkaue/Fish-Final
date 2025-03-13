@@ -4,7 +4,6 @@
             <ui:DataBinding property="value" binding-mode="ToTarget" />
         </Bindings>
     </ui:ProgressBar>
-    <ui:VisualElement style="flex-grow: 1; position: absolute; height: 80px; width: 619px; top: 849px; left: 10px; justify-content: flex-start; align-items: flex-start; background-color: rgb(224, 214, 214); background-image: url(&quot;project://database/Assets/UI/blehh.png?fileID=2800000&amp;guid=9c1fa2db54e003445b596e28861d7f13&amp;type=3#blehh&quot;); background-repeat: no-repeat no-repeat;" />
-    <ui:Label text="Inventory" style="width: 201px; height: 44px; font-size: 30px; -unity-font-style: bold; position: absolute; top: 799px; left: 12px;" />
-    <ui:Label text="02:49" style="position: absolute; height: 35px; width: 70px; top: 43px; left: 813px; font-size: 30px; -unity-font-style: bold;" />
+    <ui:Label text="Inventory" style="width: 201px; height: 44px; font-size: 30px; -unity-font-style: bold; position: absolute; top: 929px; left: 11px;" />
+    <ui:Label text="02:49" style="position: absolute; height: 35px; width: 70px; top: 52px; left: 908px; font-size: 30px; -unity-font-style: bold;" />
 </ui:UXML>

@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Inventory.uss?fileID=7433441132597879392&amp;guid=ed45e16bcc5ad1d46a45195343605ab1&amp;type=3#Inventory" />
+    <engine:VisualElement name="Container" class="container" style="flex-shrink: 0;">
+        <engine:VisualElement name="Inventory" class="inventory" style="flex-shrink: 0;">
+            <engine:Label text="Inventory" name="Header" class="header" />
+            <engine:VisualElement name="SlotContainer" class="slotcontainer" style="height: auto; flex-grow: 1; flex-shrink: 0; flex-direction: row; flex-wrap: wrap;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
