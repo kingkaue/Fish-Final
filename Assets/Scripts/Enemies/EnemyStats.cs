@@ -16,7 +16,7 @@ public class EnemyStats : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(_currentHealth == 0)
+        if(_currentHealth <= 0)
         {
             GameObject pickup = Instantiate(collectable, transform.position, Quaternion.identity);
             Vector3 collectablePosition = transform.position;
