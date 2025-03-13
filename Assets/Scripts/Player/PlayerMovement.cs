@@ -194,13 +194,15 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = true;
         canDash = false;
+        GetComponent<PlayerManager>().isInvincible = true;
 
         Vector3 dashDirection = new Vector3(move.x, 0f, move.y).normalized;
         rb.linearVelocity = dashDirection * dashSpeed;
 
-        // Dashes for dashDuration amount of seconds
+        // Dashes and sets invincibility for dashDuration amount of seconds
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
+        GetComponent<PlayerManager>().isInvincible = false;
 
         // Manages dash cooldown
         yield return new WaitForSeconds(dashCooldown);
