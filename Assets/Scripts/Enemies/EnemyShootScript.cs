@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyShootScript : MonoBehaviour
 {
+    private Animator animator;
     public Transform firePoint;
     private Transform player;
     public float detectionRange = 10f;
@@ -13,6 +14,7 @@ public class EnemyShootScript : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
@@ -38,10 +40,12 @@ public class EnemyShootScript : MonoBehaviour
 
         if (rb != null)
         {
+            animator.SetBool("isshooting", true);
             Vector3 direction = (player.position - firePoint.position).normalized;
             rb.linearVelocity = direction * projectileSpeed;
 
             projectile.transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(90, 0, 0);
         }
     }
+
 }

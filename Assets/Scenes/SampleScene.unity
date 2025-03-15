@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 2072474775}
   detectionRange: 20
-  fireRate: 1
+  fireRate: 1.27
   projectileSpeed: 10
   projectilePrefab: {fileID: 7146697060573861599, guid: 70d7433a97455384db7b634c6c4dc97f, type: 3}
 --- !u!1 &284331961
