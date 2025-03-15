@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &284331962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +380,91 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!1001 &359115898
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.377928
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.0830169
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7811546481615063722, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -4234473462164445276, guid: ddb786efc85e4554b833fe38981e35a3, type: 3}
+    - target: {fileID: 919132149155446097, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_Name
+      value: FishMafiaFinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b49110edc941ce24f90f7ac039ef408b, type: 2}
+    - target: {fileID: 5866666021909216657, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: afe6352d12e3ae04da666ad4ed19b8aa, type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,3 +1424,4 @@ SceneRoots:
   - {fileID: 688640963}
   - {fileID: 713481875}
   - {fileID: 1620360542}
+  - {fileID: 359115898}
