@@ -43,8 +43,7 @@ public class EnemyShootScript : MonoBehaviour
             animator.SetBool("isshooting", true);
             Vector3 direction = (player.position - firePoint.position).normalized;
             rb.linearVelocity = direction * projectileSpeed;
-
-            projectile.transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(90, 0, 0);
+            projectile.transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(90, 0, 0); //rotate bullet
         }
     }
 
