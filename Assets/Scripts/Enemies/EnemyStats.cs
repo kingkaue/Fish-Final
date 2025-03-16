@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
+   
     public float _maxHealth = 10;
     public float _currentHealth;
     public HealthBarScript _healthbar;
