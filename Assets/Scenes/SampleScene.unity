@@ -1169,13 +1169,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: decfbe7c0334d15448cfb28947a27848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coralPrefab: {fileID: 8449904179631587114, guid: d1df9956da235e14a8d32b06dac48d15, type: 3}
+  coralPrefab: {fileID: 9222736351342809352, guid: 92584dd7b56801544a9ab7fa3ce517f3, type: 3}
   player: {fileID: 1059938135}
   targetPlane: {fileID: 496834112}
   spawnRadius: 60
   despawnRadius: 60
-  maxCoralsPerChunk: 30
-  yPadding: 1
+  maxCoralsPerChunk: 4
+  yPadding: 5
 --- !u!4 &713481875
 Transform:
   m_ObjectHideFlags: 0
