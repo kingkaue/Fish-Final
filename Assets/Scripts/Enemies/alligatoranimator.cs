@@ -5,7 +5,8 @@ public class alligatoranimator : MonoBehaviour
     private Animator animator;
     private EnemyStats enemystats;
     private bool isdamagedcheck = false;
-    private float previoushealth; 
+    private float previoushealth;
+    private GameObject projectile;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,5 +26,13 @@ public class alligatoranimator : MonoBehaviour
         }
         previoushealth = enemystats._currentHealth; // Update previous health
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+       if(collision.gameObject == projectile)
+        {
+            Destroy(projectile);
+        }
     }
 }

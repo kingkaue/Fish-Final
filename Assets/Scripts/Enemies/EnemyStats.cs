@@ -31,7 +31,7 @@ public class EnemyStats : MonoBehaviour
     {
         GameObject pickup = Instantiate(collectable, transform.position, Quaternion.identity);
         animator.SetBool("isdead", true);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         Destroy(gameObject);
     }
 }
