@@ -10,6 +10,7 @@ public class CoralSpawner : MonoBehaviour
     public float despawnRadius = 30f; // Radius beyond which corals are despawned
     public int maxCoralsPerChunk = 10; // Maximum number of corals per chunk
     public float yPadding = 0.01f; // Small padding to ensure corals spawn on top of the plane
+    public float xpadding = 0.01f;
 
     private List<GameObject> activeCorals = new List<GameObject>(); // List of active corals
     private Vector2Int lastPlayerChunk; // Last chunk the player was in
@@ -58,10 +59,11 @@ public class CoralSpawner : MonoBehaviour
             targetPlane.position.y + 5f, // Start closer to the plane
             playerPosition.z + randomOffset.y
             );
+            //x padding
+            spawnPosition.x += xpadding;
 
             // Adjust the Y position to be on top of the assigned plane
             spawnPosition.y = GetSurfaceHeight(spawnPosition) + yPadding;
-
             // Instantiate the coral at the calculated position
             GameObject coral = Instantiate(coralPrefab, spawnPosition, Quaternion.identity);
             activeCorals.Add(coral);

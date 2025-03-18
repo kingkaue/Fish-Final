@@ -934,6 +934,7 @@ MonoBehaviour:
   despawnRadius: 60
   maxCoralsPerChunk: 4
   yPadding: 5
+  xpadding: 3
 --- !u!4 &713481875
 Transform:
   m_ObjectHideFlags: 0
@@ -984,6 +985,7 @@ MonoBehaviour:
   despawnRadius: 60
   maxCoralsPerChunk: 1
   yPadding: 1
+  xpadding: 2
 --- !u!114 &713481878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,6 +1005,7 @@ MonoBehaviour:
   despawnRadius: 60
   maxCoralsPerChunk: 1
   yPadding: 7.5
+  xpadding: 5
 --- !u!1 &752031388
 GameObject:
   m_ObjectHideFlags: 0
