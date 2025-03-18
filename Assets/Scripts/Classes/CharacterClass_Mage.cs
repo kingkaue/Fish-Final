@@ -27,7 +27,7 @@ public class CharacterClass_Mage : CharacterClass
         GetComponent<PlayerManager>().SetAttackDamage(1, classBaseAttackDamage);
 
         // Speed managed in PlayerMovement script so sets variables there
-        moveSpeed = 8;
+        moveSpeed = 12;
         GetComponent<PlayerMovement>().speed = moveSpeed;
 
         playerInput = GetComponent<PlayerInput>();

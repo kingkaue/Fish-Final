@@ -225,6 +225,7 @@ MonoBehaviour:
   maxenemies: 100
   enemyprefab: {fileID: 257502094617183370, guid: 458ac2ef40895a14facf67d6416636c6, type: 3}
   enemyprefab2: {fileID: 5610550009418438187, guid: 27d61c4eafe2f1846a40e672e0663d60, type: 3}
+  mainCamera: {fileID: 330585545}
 --- !u!4 &145860868
 Transform:
   m_ObjectHideFlags: 0
