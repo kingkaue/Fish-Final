@@ -19,6 +19,7 @@ public class CharacterClass_FIghter : CharacterClass
 
         // Setting basic stats
         className = "Fighter";
+        GetComponent<PlayerManager>().className = className;
 
         // Health and damage managed inside PlayerManager script so sets variables there
         classBaseMaxHealth = 250;

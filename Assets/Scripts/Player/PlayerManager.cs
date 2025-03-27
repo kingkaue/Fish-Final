@@ -5,6 +5,8 @@ using UnityEngine.Rendering;
 
 public class PlayerManager : MonoBehaviour
 {
+    public string className;
+
     [Header ("Health Management")]
     [SerializeField] float baseMaxHealth;
     [SerializeField] float currentMaxHealth;

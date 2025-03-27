@@ -35,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4244771704805999310}
+  - {fileID: 4099777209323341761}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &351576271109979787
@@ -153,6 +154,42 @@ MonoBehaviour:
   coreDamage: 3
   splashDamageRadius: 4
   splashDamage: 1
+  splitOrigin: {fileID: 4099777209323341761}
+  bubblePrefab: {fileID: 2486822060649500248}
+  spreadAngle: 15
+  numBubbles: 5
+  isSplit: 0
+--- !u!1 &8471540880015574684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4099777209323341761}
+  m_Layer: 0
+  m_Name: Split Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4099777209323341761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8471540880015574684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1821885884676254862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5926379665294300296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1668918428060068282, guid: f9faab5f037589c4fb4886748eac5a0c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1668918428060068282, guid: f9faab5f037589c4fb4886748eac5a0c, type: 3}
       propertyPath: m_LocalPosition.z

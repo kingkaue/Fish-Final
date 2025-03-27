@@ -29,6 +29,7 @@ public class CharacterClass_Rogue : CharacterClass
     {
         // Setting base stats
         className = "Rogue";
+        GetComponent<PlayerManager>().className = className;
 
         // Health and damage managed inside PlayerManager script so sets variables there
         classBaseMaxHealth = 200f;

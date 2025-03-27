@@ -8,6 +8,7 @@ public class CharacterClass_Mage : CharacterClass
     [SerializeField] Transform bubbleOrigin;
     public float bubbleSpeed = 5f;
     public float fireRate = 0.5f;
+    public bool splitShotActivated = false;
 
     private float nextFireTime = 0f;
     private PlayerInput playerInput;
@@ -17,6 +18,7 @@ public class CharacterClass_Mage : CharacterClass
     {
         // Initializing class stats
         className = "Mage";
+        GetComponent<PlayerManager>().className = className;
 
         // Health and damage managed inside PlayerManager script so sets variables there
         classBaseMaxHealth = 150;
@@ -90,9 +92,15 @@ public class CharacterClass_Mage : CharacterClass
 
         // Bullet shoots at set direction at speed
         GameObject bubble = Instantiate(bubblePrefab, bubbleOrigin.position, Quaternion.identity);
+        if (splitShotActivated == true)
+        {
+            bubble.GetComponent<Bubble>().ActivateSplit();
+            Debug.Log("isSplit = true");
+        }
         Rigidbody bubbleRb = bubble.GetComponent<Rigidbody>();
         bubbleRb.linearVelocity = direction * bubbleSpeed;
         Debug.Log("Bubble Speed is " + bubbleRb.linearVelocity);
         Debug.Log("Bubble Direction is " + direction);
     }
+
 }

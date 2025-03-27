@@ -1,3 +1,4 @@
+using Unity.Android.Gradle;
 using UnityEngine;
 
 public class Bubble : MonoBehaviour
@@ -5,6 +6,13 @@ public class Bubble : MonoBehaviour
     public float coreDamage;
     public float splashDamageRadius = 4f;
     public float splashDamage;
+
+    [Header ("Split Shot")]
+    [SerializeField] Transform splitOrigin;
+    [SerializeField] GameObject bubblePrefab;
+    [SerializeField] float spreadAngle;
+    [SerializeField] int numBubbles;
+    [SerializeField] bool isSplit = false;
 
     void Update()
     {
@@ -39,7 +47,41 @@ public class Bubble : MonoBehaviour
             // Deals splash damage
             SplashDamage(other);
             Debug.Log("Dealt " + coreDamage + " core damage and " + splashDamage + " splash damage");
+            if (isSplit == true)
+            {
+                SplitShot(other);
+            }
             Destroy(this.gameObject);
+        }
+    }
+
+    public void ActivateSplit()
+    {
+        isSplit = true;
+    }
+
+    void SplitShot(Collider hitEnemy)
+    {
+        // Equally spaces distance between daggers depending on number of daggers
+        float angleBetweenBubbles = spreadAngle / (numBubbles - 1);
+        float startAngle = -spreadAngle / 2;
+        Quaternion originalRotation = splitOrigin.rotation;
+
+        // Spawns each dagger
+        for (int i = 0; i < numBubbles; i++)
+        {
+            float angle = startAngle + (angleBetweenBubbles * i);
+
+            // Shoots dagger at certain angle
+            splitOrigin.transform.Rotate(0, angle, 0);
+            GameObject splitBubble = Instantiate(bubblePrefab, splitOrigin.position, Quaternion.identity);
+            splitBubble.GetComponent<Bubble>().isSplit = false;
+            Physics.IgnoreCollision(splitBubble.GetComponent<SphereCollider>(), hitEnemy);
+            Rigidbody splitBubbleRb = splitBubble.GetComponent<Rigidbody>();
+            splitBubbleRb.AddForce(splitOrigin.transform.forward * 500);
+
+            // Resets rotation of dagggerOrigin to work properly
+            splitOrigin.rotation = originalRotation;
         }
     }
 }
