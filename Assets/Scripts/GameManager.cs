@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+    
     public GameObject playerPrefab, EnemyPrefab;
     GameObject enemyParent;
     float timer;
-    int xp;
+    int xp = 0;
     int nextLevelXP = 100;
     int playerLevel = 1;
     public float levelXPMult = 1.5f;
@@ -13,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+        
+        /*
         enemyParent = new GameObject("Enemies");
 
         GenerateLevel();
@@ -22,12 +27,13 @@ public class GameManager : MonoBehaviour
         //temp enemy spawner for proof of concept
         for (int i = 0; i < 5; i++)
             SpawnEnemy();
+        */
     }
 
 
     void Start()
     {
-        
+        DisplayXP();
     }
 
     void Update()
@@ -68,9 +74,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void AddXP(int amount)
+    public void AddXP(int amount)
     {
         xp += amount;
+        DisplayXP();
 
         CheckLevelUp();
     }
@@ -90,6 +97,11 @@ public class GameManager : MonoBehaviour
     void CheckLevelUp()
     {
         if (xp >= nextLevelXP) LevelUp();
+    }
+
+    void DisplayXP()
+    {
+        Debug.Log("Current XP: " + xp);
     }
 
     //track character selection
