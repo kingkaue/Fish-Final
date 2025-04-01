@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     GameObject enemyParent;
     float timer;
     int xp;
+    int nextLevelXP;
+    int playerLevel;
+    float levelXPMult;
 
 
     private void Awake()
@@ -24,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        playerLevel = 1;
+        nextLevelXP = 100;
     }
 
     void Update()
@@ -68,6 +72,25 @@ public class GameManager : MonoBehaviour
     void AddXP(int amount)
     {
         xp += amount;
+
+        CheckLevelUp();
+    }
+
+    void LevelUp()
+    {
+        //handle level up actions
+
+        //set next level up conditions
+        playerLevel++;
+        nextLevelXP += (int)(nextLevelXP * levelXPMult);
+
+        //check for multiple level ups
+        CheckLevelUp();
+    }
+
+    void CheckLevelUp()
+    {
+        if (xp >= nextLevelXP) LevelUp();
     }
 
     //track character selection
