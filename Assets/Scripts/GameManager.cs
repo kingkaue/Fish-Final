@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
     GameObject enemyParent;
     float timer;
     int xp;
-    int nextLevelXP;
-    int playerLevel;
-    float levelXPMult;
+    int nextLevelXP = 100;
+    int playerLevel = 1;
+    public float levelXPMult = 1.5f;
 
 
     private void Awake()
@@ -27,8 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerLevel = 1;
-        nextLevelXP = 100;
+        
     }
 
     void Update()
