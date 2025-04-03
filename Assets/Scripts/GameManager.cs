@@ -88,6 +88,9 @@ public class GameManager : MonoBehaviour
 
         //set next level up conditions
         playerLevel++;
+
+        if (playerLevel % 5 == 0) AddAugment();
+
         nextLevelXP += (int)(nextLevelXP * levelXPMult);
 
         //check for multiple level ups
@@ -104,9 +107,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Current XP: " + xp);
     }
 
-    //track character selection
+    void AddAugment()
+    {
 
-    //track level progression
+    }
+
+    //track character selection
 
     //save state
 
