@@ -13,6 +13,7 @@ public class Bubble : MonoBehaviour
     [SerializeField] float spreadAngle;
     [SerializeField] int numBubbles;
     [SerializeField] bool isSplit = false;
+    [SerializeField] bool isBubbleBurn = false;
 
     void Update()
     {
