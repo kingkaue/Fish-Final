@@ -15,7 +15,7 @@ public class BubbleBurn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private IEnumerator BubbleBurnDamage(Collider enemy)
@@ -25,8 +25,9 @@ public class BubbleBurn : MonoBehaviour
         while (elapsedTime < burnDuration)
         {
             elapsedTime += Time.deltaTime;
-            enemy.GetComponent<EnemyStats>()._currentHealth - burnDamage;
+            //enemy.GetComponent<EnemyStats>()._currentHealth - burnDamage;
             yield return null;
         }
 
+    }
 }
