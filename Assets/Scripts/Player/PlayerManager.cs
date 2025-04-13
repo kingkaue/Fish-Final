@@ -1,32 +1,35 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class PlayerManager : MonoBehaviour
 {
     public string className;
 
-    [Header ("Health Management")]
+    // Delegate for damage events
+    public delegate void PlayerDamagedEventHandler(float damageTaken, float currentHealth, float maxHealth);
+    public event PlayerDamagedEventHandler OnPlayerDamaged;
+
+    public delegate void PlayerDeathEventHandler();
+    public event PlayerDeathEventHandler OnPlayerDeath;
+
+    [Header("Health Management")]
     [SerializeField] float baseMaxHealth;
     [SerializeField] float currentMaxHealth;
     [SerializeField] float currentHealth;
     public float healthMultiplier;
 
-    [Header ("Damage Management")]
+    [Header("Damage Management")]
     public float baseAttackDamage;
     public float attackDamage;
     public float damageMultiplier;
     public bool isInvincible;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Debug.Log("Player Health is " + currentHealth);
         damageMultiplier = 1.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Makes sure current health isn't over the max health
@@ -38,6 +41,7 @@ public class PlayerManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Player Health is dead");
+            OnPlayerDeath?.Invoke();
             Destroy(this.gameObject);
         }
     }
@@ -46,7 +50,6 @@ public class PlayerManager : MonoBehaviour
     //----- Damage Management Functions -----//
     ///////////////////////////////////////////
 
-    // Called in other scripts to change damage multiplier
     public void SetDamageMultiplier(float damageMultiplierAdd)
     {
         if (damageMultiplier == 0)
@@ -59,13 +62,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    // Called in other scripts to change base damage
     public void SetBaseDamage(float baseAdd)
     {
         baseAttackDamage = baseAttackDamage + baseAdd;
     }
 
-    // Sets attack damage based on base damage value and multiplier
     public void SetAttackDamage(float multiplier, float baseDamage)
     {
         attackDamage = baseDamage * multiplier;
@@ -81,44 +82,69 @@ public class PlayerManager : MonoBehaviour
         currentMaxHealth = classHealth;
         currentHealth = classHealth;
     }
-    // Called in other scripts to change health multiplier
+
     public void SetHealthMultiplier(float healthMultiplierAdd)
     {
         healthMultiplier = healthMultiplier * healthMultiplierAdd;
     }
 
-    // Called in other scripts to change max health
     public void MultiplyMaxHealth(float healthmult)
     {
         float oldCurrentHealth = currentHealth;
         currentMaxHealth = currentMaxHealth * healthmult;
 
-        // In cases like glass cannon where players take a health down multiplier,
-        // this prevents reduction of current health
         if ((currentHealth * healthmult) > oldCurrentHealth)
         {
             currentHealth = currentHealth * healthmult;
         }
 
-        // Prevents player from ahving more health than max
         if (currentHealth > currentMaxHealth)
         {
             currentHealth = currentMaxHealth;
         }
-
     }
 
-    // Called in other scripts to heal player
     public void Heal(float percentageOfMaxHealth)
     {
-        currentHealth = currentHealth + (currentMaxHealth * percentageOfMaxHealth);
+        try
+        {
+            if (percentageOfMaxHealth < 0)
+            {
+                throw new System.ArgumentException("Heal percentage cannot be negative", nameof(percentageOfMaxHealth));
+            }
+
+            currentHealth = currentHealth + (currentMaxHealth * percentageOfMaxHealth);
+            Debug.Log($"Player healed by {percentageOfMaxHealth * 100}%");
+        }
+        catch (System.ArgumentException ex)
+        {
+            Debug.LogError($"Invalid heal attempt: {ex.Message}");
+            // Recover by not healing (or could set to minimum heal)
+            currentHealth = currentHealth + 0;
+        }
     }
 
-    // Called in other scripts to deal damage to player
     public void TakeDamage(float damage)
     {
-        currentHealth = currentHealth - damage;
-        StartCoroutine(InvincibilityFrames(0.25f));
+        if (isInvincible) return;
+
+        try
+        {
+            if (damage < 0)
+            {
+                throw new System.ArgumentException("Damage value cannot be negative", nameof(damage));
+            }
+
+            currentHealth = currentHealth - damage;
+            OnPlayerDamaged?.Invoke(damage, currentHealth, currentMaxHealth);
+            StartCoroutine(InvincibilityFrames(0.25f));
+        }
+        catch (System.ArgumentException ex)
+        {
+            Debug.LogError($"Invalid damage attempt: {ex.Message}");
+            // Recover by not taking damage
+            currentHealth = currentHealth - 0;
+        }
     }
 
     private IEnumerator InvincibilityFrames(float duration)
