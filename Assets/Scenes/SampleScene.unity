@@ -972,6 +972,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a50c41265abe6f47ae252e8c6d800d8, type: 3}
+--- !u!1 &496834108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 620982544987821860, guid: e9d888d42ea27764a9b6f0721b55bc8c, type: 3}
+  m_PrefabInstance: {fileID: 3663871014461128391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &496834112 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5972545288066599638, guid: e9d888d42ea27764a9b6f0721b55bc8c, type: 3}
+  m_PrefabInstance: {fileID: 3663871014461128391}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &547628042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,7 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coralPrefab: {fileID: 9222736351342809352, guid: 92584dd7b56801544a9ab7fa3ce517f3, type: 3}
   player: {fileID: 1059938135}
-  targetPlane: {fileID: 0}
+  targetPlane: {fileID: 496834112}
   spawnRadius: 60
   despawnRadius: 60
   maxCoralsPerChunk: 4
@@ -1227,7 +1237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67120af809d0ed24b81fbdc12c9c2b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planeChunkPrefab: {fileID: 0}
+  planeChunkPrefab: {fileID: 496834108}
   player: {fileID: 1059938135}
   chunkSize: 10
   renderDistance: 3
@@ -1245,7 +1255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coralPrefab: {fileID: 8003554431850327796, guid: b8605ab83b00c1e408a566e74c405756, type: 3}
   player: {fileID: 1059938135}
-  targetPlane: {fileID: 0}
+  targetPlane: {fileID: 496834112}
   spawnRadius: 60
   despawnRadius: 60
   maxCoralsPerChunk: 1
@@ -1265,7 +1275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coralPrefab: {fileID: 452860116380826463, guid: 777736fdf17f2224183fe8ab23e344e7, type: 3}
   player: {fileID: 1059938135}
-  targetPlane: {fileID: 0}
+  targetPlane: {fileID: 496834112}
   spawnRadius: 60
   despawnRadius: 60
   maxCoralsPerChunk: 1
@@ -1501,7 +1511,7 @@ PrefabInstance:
     - target: {fileID: 2535954103604261516, guid: 838c0bef810bfe94d8e33947c3cba7c6, type: 3}
       propertyPath: reflectionPlane
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 496834112}
     - target: {fileID: 2535954103604261519, guid: 838c0bef810bfe94d8e33947c3cba7c6, type: 3}
       propertyPath: m_Name
       value: WaterReflectionCamera
