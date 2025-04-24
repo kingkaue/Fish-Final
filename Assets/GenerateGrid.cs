@@ -45,18 +45,24 @@ public class GenerateGrid : MonoBehaviour
     {
         for (int c = 0; c < 20; c++)
         {
-            Instantiate(cactus, ObjectSpawnLocation(), Quaternion.identity);
+            Vector3 spawnPos = ObjectSpawnLocation();
+
+            // Raycast down to find exact terrain height
+            RaycastHit hit;
+            float terrainHeight = spawnPos.y; // Fallback to original height if raycast fails
+            if (Physics.Raycast(spawnPos + Vector3.up * 100, Vector3.down, out hit, Mathf.Infinity))
+            {
+                terrainHeight = hit.point.y;
+            }
+
+            Instantiate(cactus, new Vector3(spawnPos.x, terrainHeight + 3.5f, spawnPos.z), Quaternion.identity);
         }
     }
 
     public Vector3 ObjectSpawnLocation()
     {
         int rndIndex = Random.Range(0, blockPositions.Count);
-        Vector3 newPos = new Vector3(
-            blockPositions[rndIndex].x,
-            blockPositions[rndIndex].y + 1.5f,
-            blockPositions[rndIndex].z
-        );
+        Vector3 newPos = blockPositions[rndIndex];
         blockPositions.RemoveAt(rndIndex);
         return newPos;
     }
@@ -109,7 +115,7 @@ public class GenerateGrid : MonoBehaviour
     public float generateNoise(int x, int z, float detailScale)
     {
         float xNoise = (x + transform.position.x) / detailScale;
-        float zNoise = (z + transform.position.z) / detailScale; // Fixed: Use z position
+        float zNoise = (z + transform.position.z) / detailScale;
         return Mathf.PerlinNoise(xNoise, zNoise);
     }
 }
