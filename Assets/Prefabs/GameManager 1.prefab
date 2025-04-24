@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7692039055349544974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3842671862867712805}
+  - component: {fileID: 4094259755614011026}
+  - component: {fileID: 412242788758036544}
+  - component: {fileID: 7825986358788974158}
+  - component: {fileID: 7311563097604521640}
+  - component: {fileID: 1609893719445725276}
+  m_Layer: 0
+  m_Name: GameManager 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3842671862867712805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692039055349544974}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -7.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4094259755614011026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692039055349544974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decfbe7c0334d15448cfb28947a27848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coralPrefab: {fileID: 9222736351342809352, guid: 92584dd7b56801544a9ab7fa3ce517f3, type: 3}
+  player: {fileID: 0}
+  targetPlane: {fileID: 0}
+  spawnRadius: 60
+  despawnRadius: 60
+  maxCoralsPerChunk: 4
+  yPadding: 5
+  xpadding: 3
+--- !u!114 &412242788758036544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692039055349544974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67120af809d0ed24b81fbdc12c9c2b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeChunkPrefab: {fileID: 0}
+  player: {fileID: 0}
+  chunkSize: 10
+  renderDistance: 3
+--- !u!114 &7825986358788974158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692039055349544974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decfbe7c0334d15448cfb28947a27848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coralPrefab: {fileID: 8003554431850327796, guid: b8605ab83b00c1e408a566e74c405756, type: 3}
+  player: {fileID: 0}
+  targetPlane: {fileID: 0}
+  spawnRadius: 60
+  despawnRadius: 60
+  maxCoralsPerChunk: 1
+  yPadding: 1
+  xpadding: 2
+--- !u!114 &7311563097604521640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692039055349544974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decfbe7c0334d15448cfb28947a27848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coralPrefab: {fileID: 452860116380826463, guid: 777736fdf17f2224183fe8ab23e344e7, type: 3}
+  player: {fileID: 0}
+  targetPlane: {fileID: 0}
+  spawnRadius: 60
+  despawnRadius: 60
+  maxCoralsPerChunk: 1
+  yPadding: 7.5
+  xpadding: 5
+--- !u!114 &1609893719445725276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692039055349544974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fac39bed971dbc48b666421954fdf79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseMenu: {fileID: 0}

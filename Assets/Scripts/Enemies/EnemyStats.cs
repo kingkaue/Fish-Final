@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -11,9 +12,19 @@ public class EnemyStats : MonoBehaviour
     private Animator animator;
     private bool isDying = false;  // Flag to prevent multiple executions
 
+    [SerializeField] private float stoppingDistance = 1.5f;
+    private GameObject destination;
+    private NavMeshAgent agent;
     void Start()
     {
+        
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        // Critical agent settings
+        agent.stoppingDistance = stoppingDistance;
+        agent.updateUpAxis = false;
+        agent.baseOffset = 0.1f;
+        agent.acceleration = 8f;
         _currentHealth = _maxHealth;
         _healthbar.UpdateHealthBar(_maxHealth, _currentHealth);
     }

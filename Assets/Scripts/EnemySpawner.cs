@@ -1,85 +1,88 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public float maxenemies = 1000;
-    private float playerlevel = 1;
-    public GameObject enemyprefab;
-    public GameObject enemyprefab2;
-    public Camera mainCamera;
+    public float maxEnemies = 1000;
+    private float playerLevel = 1;
+    public GameObject enemyPrefab;
+    public GameObject enemyPrefab2;
+    public float spawnHeightAboveGrid = 1.5f;
+    public float spawnRadius = 50f;
+    public float spawnDelay = 2f;
 
-    private int randomint;
+    private GenerateGrid gridGenerator; // Reference to your grid generator
 
     void Start()
     {
-        StartCoroutine(enemyspawner());
-    }
-
-    void Update()
-    {
-        randomint = Random.Range(3, 7); // Update randomint every frame
-    }
-
-    private IEnumerator enemyspawner()
-    {
-        yield return new WaitForSeconds(1f); // Initial delay
-
-        if (playerlevel == 1)
+        gridGenerator = FindObjectOfType<GenerateGrid>();
+        if (gridGenerator == null)
         {
-            for (int j = 0; j <= maxenemies; j++)
+            Debug.LogError("No GenerateGrid found in scene!");
+            return;
+        }
+
+        StartCoroutine(EnemySpawnerRoutine());
+    }
+
+    private IEnumerator EnemySpawnerRoutine()
+    {
+        yield return new WaitUntil(() => gridGenerator.blockPositions.Count > 0); // Wait for grid generation
+
+        if (playerLevel == 1)
+        {
+            for (int j = 0; j <= maxEnemies; j++)
             {
-                // Recalculate the off-screen position for each enemy
-                int side = Random.Range(0, 4);
-                Vector3 offScreenViewportPosition = GetRandomOffScreenPosition(side);
-                Vector3 offScreenWorldPosition = mainCamera.ViewportToWorldPoint(offScreenViewportPosition);
+                SpawnEnemy(enemyPrefab);
+                yield return new WaitForSeconds(spawnDelay);
 
-                // Spawn the first enemy
-                Instantiate(enemyprefab, offScreenWorldPosition, Quaternion.identity);
-                yield return new WaitForSeconds(2f); // Delay between spawns
-
-                // Randomly spawn the second enemy
-                if (randomint == 5)
+                if (Random.Range(0, 7) == 5) // 1 in 7 chance
                 {
-                    // Recalculate the off-screen position for the second enemy
-                    side = Random.Range(0, 4);
-                    offScreenViewportPosition = GetRandomOffScreenPosition(side);
-                    offScreenWorldPosition = mainCamera.ViewportToWorldPoint(offScreenViewportPosition);
-
-                    Instantiate(enemyprefab2, offScreenWorldPosition, Quaternion.identity);
-                    yield return new WaitForSeconds(2f); // Delay between spawns
+                    SpawnEnemy(enemyPrefab2);
+                    yield return new WaitForSeconds(spawnDelay);
                 }
             }
         }
     }
 
-    Vector3 GetRandomOffScreenPosition(int side)
+    private void SpawnEnemy(GameObject enemyType)
     {
-        float x = 0f, y = 0f;
-
-        switch (side)
+        // Method 1: Spawn on random grid position (from your existing blockPositions)
+        if (gridGenerator.blockPositions.Count > 0)
         {
-            case 0: // Left side
-                x = Random.Range(-0.5f, -0.1f); // Random x outside the left edge
-                y = Random.Range(0.1f, 0.9f);   // Random y within the screen height
-                break;
-            case 1: // Right side
-                x = Random.Range(1.1f, 1.5f);   // Random x outside the right edge
-                y = Random.Range(0.1f, 0.9f);  // Random y within the screen height
-                break;
-            case 2: // Top side
-                x = Random.Range(0.1f, 0.9f);   // Random x within the screen width
-                y = Random.Range(1.1f, 1.5f);   // Random y outside the top edge
-                break;
-            case 3: // Bottom side
-                x = Random.Range(0.1f, 0.9f);   // Random x within the screen width
-                y = Random.Range(-0.5f, -0.1f); // Random y outside the bottom edge
-                break;
+            int randomIndex = Random.Range(0, gridGenerator.blockPositions.Count);
+            Vector3 spawnPos = gridGenerator.blockPositions[randomIndex];
+            spawnPos.y += spawnHeightAboveGrid;
+
+            GameObject enemy = Instantiate(enemyType, spawnPos, Quaternion.identity);
+            SetupEnemyNavMesh(enemy);
+        }
+        // Method 2: Spawn at random NavMesh location (alternative approach)
+        else
+        {
+            Vector3 randomPoint = transform.position + Random.insideUnitSphere * spawnRadius;
+            randomPoint.y = 100f; // Start above terrain
+
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 200f, NavMesh.AllAreas))
+            {
+                GameObject enemy = Instantiate(enemyType, hit.position + Vector3.up * spawnHeightAboveGrid, Quaternion.identity);
+                SetupEnemyNavMesh(enemy);
+            }
+        }
+    }
+
+    private void SetupEnemyNavMesh(GameObject enemy)
+    {
+        NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            agent = enemy.AddComponent<NavMeshAgent>();
+            agent.baseOffset = spawnHeightAboveGrid;
         }
 
-        // Set z to the distance from the camera (adjust based on your game)
-        float z = 50f;
-
-        return new Vector3(x, y, z);
+        // Add any additional NavMesh setup here
+        agent.speed = Random.Range(3f, 6f);
+        agent.angularSpeed = 120f;
     }
 }
