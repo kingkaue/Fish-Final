@@ -534,7 +534,7 @@ MonoBehaviour:
   worldsizeX: 100
   worldsizeZ: 100
   gridoffset: 1.1
-  noiseHeight: 5
+  noiseHeight: 1
   blockPositions: []
 --- !u!4 &1561082782
 Transform:
@@ -565,7 +565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 416649792024566752, guid: 1a50c41265abe6f47ae252e8c6d800d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.09
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 416649792024566752, guid: 1a50c41265abe6f47ae252e8c6d800d8, type: 3}
       propertyPath: m_LocalPosition.z

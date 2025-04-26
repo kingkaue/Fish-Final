@@ -12,6 +12,7 @@ public class EnemyFollow : MonoBehaviour
     {
         destination = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
+
     }
 
     // Update is called once per frame
