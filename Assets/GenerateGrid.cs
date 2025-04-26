@@ -14,12 +14,13 @@ public class GenerateGrid : MonoBehaviour
     public float gridoffset = 1.1f;
     public int noiseHeight = 5;
     public List<Vector3> blockPositions = new List<Vector3>();
+    public float Yoffset = 3.5f;
 
     void Start()
     {
         GenerateTerrain();
         SpawnObjects();
-        CombineMeshesAndBakeNavMesh();
+        CombineMeshes(); // Removed the NavMesh baking part
     }
 
     public void GenerateTerrain()
@@ -55,7 +56,7 @@ public class GenerateGrid : MonoBehaviour
                 terrainHeight = hit.point.y;
             }
 
-            Instantiate(cactus, new Vector3(spawnPos.x, terrainHeight + 3.5f, spawnPos.z), Quaternion.identity);
+            Instantiate(cactus, new Vector3(spawnPos.x, terrainHeight + Yoffset, spawnPos.z), Quaternion.identity);
         }
     }
 
@@ -67,7 +68,7 @@ public class GenerateGrid : MonoBehaviour
         return newPos;
     }
 
-    public void CombineMeshesAndBakeNavMesh()
+    public void CombineMeshes()
     {
         // 1. Combine all child meshes
         MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>(true); // Include inactive
@@ -99,16 +100,6 @@ public class GenerateGrid : MonoBehaviour
         foreach (Transform child in transform)
         {
             if (child != transform) Destroy(child.gameObject);
-        }
-
-        // 6. Bake NavMesh
-        if (navMeshSurface != null)
-        {
-            navMeshSurface.BuildNavMesh();
-        }
-        else
-        {
-            Debug.LogWarning("NavMeshSurface not assigned!");
         }
     }
 
