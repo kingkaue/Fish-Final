@@ -4,45 +4,122 @@ using UnityEngine.AI;
 
 public class EnemyStats : MonoBehaviour
 {
-   
-    public float _maxHealth = 10;
-    public float _currentHealth;
-    public HealthBarScript _healthbar;
-    public GameObject collectable;
-    private Animator animator;
-    private bool isDying = false;  // Flag to prevent multiple executions
+    [Header("Enemy Identification")]
+    public string EnemyType = "BasicEnemy"; // Set this in inspector for each prefab
 
+    [Header("Health Settings")]
+    public float MaxHealth = 10f;
+    [SerializeField] public float _currentHealth;
+    public HealthBarScript HealthBar;
+    public GameObject CollectableDrop;
+
+    [Header("Movement Settings")]
     [SerializeField] private float stoppingDistance = 1.5f;
-    private GameObject destination;
-    private NavMeshAgent agent;
-    void Start()
-    {
-        
-        animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
-        // Critical agent settings
-        agent.stoppingDistance = stoppingDistance;
-        agent.updateUpAxis = false;
-        agent.baseOffset = 0.1f;
-        agent.acceleration = 8f;
-        _currentHealth = _maxHealth;
-        _healthbar.UpdateHealthBar(_maxHealth, _currentHealth);
-    }
 
-    private void LateUpdate()
+    // Properties for safe access
+    public float CurrentHealth
     {
-        if (_currentHealth <= 0 && !isDying) // Check if already dying
+        get => _currentHealth;
+        set
         {
-            isDying = true; // Set the flag. Now it won't execute again. 
-            StartCoroutine(dying());
+            _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+            if (HealthBar != null) HealthBar.UpdateHealthBar(MaxHealth, _currentHealth);
         }
     }
 
-    private IEnumerator dying()
+    // Components
+    private Animator _animator;
+    private NavMeshAgent _agent;
+    private bool _isDying = false;
+
+    void Start()
     {
-        GameObject pickup = Instantiate(collectable, transform.position, Quaternion.identity);
-        animator.SetBool("isdead", true);
+        InitializeComponents();
+        CurrentHealth = MaxHealth; // Uses the property setter
+    }
+
+    private void InitializeComponents()
+    {
+        _animator = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
+
+        // Configure NavMeshAgent
+        if (_agent != null)
+        {
+            _agent.stoppingDistance = stoppingDistance;
+            _agent.updateUpAxis = false;
+            _agent.baseOffset = 0.1f;
+            _agent.acceleration = 8f;
+        }
+    }
+
+    void Update()
+    {
+        if (CurrentHealth <= 0 && !_isDying)
+        {
+            _isDying = true;
+            StartCoroutine(Die());
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (_isDying) return;
+
+        CurrentHealth -= damage;
+
+        // Trigger hit animation if needed
+        if (_animator != null)
+        {
+            _animator.SetTrigger("Hit");
+        }
+    }
+
+    private IEnumerator Die()
+    {
+        // Drop collectable if specified
+        if (CollectableDrop != null)
+        {
+            Instantiate(CollectableDrop, transform.position, Quaternion.identity);
+        }
+
+        // Play death animation
+        if (_animator != null)
+        {
+            _animator.SetBool("IsDead", true);
+        }
+
+        // Disable collider and agent
+        var collider = GetComponent<Collider>();
+        if (collider != null) collider.enabled = false;
+
+        if (_agent != null) _agent.enabled = false;
+
+        // Wait for animation (or fixed time if no animation)
         yield return new WaitForSeconds(1f);
+
         Destroy(gameObject);
     }
+
+    // For save system integration
+    public EnemySaveData GetSaveData()
+    {
+        return new EnemySaveData
+        {
+            EnemyType = this.EnemyType,
+            Position = transform.position,
+            Rotation = transform.rotation,
+            CurrentHealth = this.CurrentHealth
+        };
+    }
+}
+
+// For save system (could be in a separate file)
+[System.Serializable]
+public struct EnemySaveData
+{
+    public string EnemyType;
+    public Vector3 Position;
+    public Quaternion Rotation;
+    public float CurrentHealth;
 }

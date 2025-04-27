@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
     
     public GameObject playerPrefab, EnemyPrefab;
     GameObject enemyParent;
@@ -11,23 +11,28 @@ public class GameManager : MonoBehaviour
    public int nextLevelXP = 100;
     public int playerLevel = 1;
     public float levelXPMult = 1.5f;
+    public GameObject CurrentPlayer;
 
 
     private void Awake()
     {
-        instance = this;
-        
-        /*
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            InitializeGame();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void InitializeGame()
+    {
         enemyParent = new GameObject("Enemies");
-
-        GenerateLevel();
-
         SpawnPlayer();
-
-        //temp enemy spawner for proof of concept
-        for (int i = 0; i < 5; i++)
-            SpawnEnemy();
-        */
+        // Any other initialization code
     }
 
 
@@ -42,10 +47,19 @@ public class GameManager : MonoBehaviour
         //Debug.Log(timer);
     }
 
-    void SpawnPlayer()
+    public void SpawnPlayer()
     {
-        GameObject player = Instantiate(playerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
-        player.name = "Player";
+        if (playerPrefab != null)
+        {
+            CurrentPlayer = Instantiate(playerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+            CurrentPlayer.name = "Player";
+            CurrentPlayer.tag = "Player"; // Critical for save system
+        }
+        else
+        {
+            Debug.LogError("Player prefab not assigned in GameManager!");
+        }
+        
     }
 
     void SpawnEnemy()
@@ -117,5 +131,26 @@ public class GameManager : MonoBehaviour
 
     //save state
 
+    public class GameState
+    {
+        public int savedLevel;
+        public int savedXP;
+        // Add other game state variables
+    }
 
+    public GameState GetGameState()
+    {
+        return new GameState()
+        {
+            savedLevel = playerLevel,
+            savedXP = xp
+        };
+    }
+
+    public void RestoreGameState(GameState state)
+    {
+        playerLevel = state.savedLevel;
+        xp = state.savedXP;
+        // Restore other state variables
+    }
 }

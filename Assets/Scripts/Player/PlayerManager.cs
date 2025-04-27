@@ -3,6 +3,45 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+
+    [System.Serializable]
+    public class PlayerState
+    {
+        public float savedHealth;
+        public float savedMaxHealth;
+        public string savedClass;
+    }
+
+    private void ClampHealth()
+    {
+        currentHealth = Mathf.Clamp(currentHealth, 0, currentMaxHealth);
+    }
+
+    private void CheckDeath()
+    {
+        if (currentHealth <= 0)
+        {
+            OnPlayerDeath?.Invoke();
+            // Handle death (respawn or game over)
+        }
+    }
+    public PlayerState GetPlayerState()
+    {
+        return new PlayerState()
+        {
+            savedHealth = currentHealth,
+            savedMaxHealth = currentMaxHealth,
+            savedClass = className
+        };
+    }
+
+    public void RestorePlayerState(PlayerState state)
+    {
+        currentHealth = state.savedHealth;
+        currentMaxHealth = state.savedMaxHealth;
+        className = state.savedClass;
+        // You may need to reinitialize components based on class
+    }
     public string className;
 
     // Delegate for damage events

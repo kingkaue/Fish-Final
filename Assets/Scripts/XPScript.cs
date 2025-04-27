@@ -6,6 +6,6 @@ public class XPScript : CollectibleEffect
     public int xpAmount;
     public override void Apply(GameObject target)
     {
-        GameManager.instance.AddXP(xpAmount);
+        GameManager.Instance.AddXP(xpAmount);
     }
 }

@@ -30,7 +30,7 @@ public class FighterHitboxes : MonoBehaviour
             {
                 // Apply damage
                 enemyStats._currentHealth = Mathf.Max(enemyStats._currentHealth - coreDamage, 0);
-                enemyStats._healthbar.UpdateHealthBar(enemyStats._maxHealth, enemyStats._currentHealth);
+                enemyStats.HealthBar.UpdateHealthBar(enemyStats.MaxHealth, enemyStats._currentHealth);
 
                 // Apply knockback
                 Rigidbody enemyRb = other.GetComponent<Rigidbody>();

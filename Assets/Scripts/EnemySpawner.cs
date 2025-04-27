@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitUntil(() => gridGenerator.blockPositions.Count > 0); // Wait for grid generation
 
-        if (GameManager.instance.playerLevel == 1)
+        if (GameManager.Instance.playerLevel == 1)
         {
             for (int j = 0; j <= maxEnemies; j++)
             {
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        if (GameManager.instance.playerLevel == 2)
+        if (GameManager.Instance.playerLevel == 2)
         {
             for (int j = 0; j <= maxEnemies; j++)
             {
@@ -62,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        if (GameManager.instance.playerLevel == 3)
+        if (GameManager.Instance.playerLevel == 3)
         {
             for (int j = 0; j <= maxEnemies; j++)
             {

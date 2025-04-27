@@ -31,7 +31,7 @@ public class Bubble : MonoBehaviour
             if (c.tag == "Enemy" && c != hitEnemy)
             {
                 c.GetComponent<EnemyStats>()._currentHealth = Mathf.Max(c.GetComponent<EnemyStats>()._currentHealth - splashDamage, 0);
-                c.GetComponent<EnemyStats>()._healthbar.UpdateHealthBar(c.GetComponent<EnemyStats>()._maxHealth, c.GetComponent<EnemyStats>()._currentHealth);
+                c.GetComponent<EnemyStats>().HealthBar.UpdateHealthBar(c.GetComponent<EnemyStats>().MaxHealth, c.GetComponent<EnemyStats>()._currentHealth);
             }
         }
     }
@@ -43,7 +43,7 @@ public class Bubble : MonoBehaviour
         {
             // Deals core damage to enemy hit with projectile
             other.GetComponent<EnemyStats>()._currentHealth = Mathf.Max(other.GetComponent<EnemyStats>()._currentHealth - coreDamage, 0);
-            other.GetComponent<EnemyStats>()._healthbar.UpdateHealthBar(other.GetComponent<EnemyStats>()._maxHealth, other.GetComponent<EnemyStats>()._currentHealth);
+            other.GetComponent<EnemyStats>().HealthBar.UpdateHealthBar(other.GetComponent<EnemyStats>().MaxHealth, other.GetComponent<EnemyStats>()._currentHealth);
 
             // Deals splash damage
             SplashDamage(other);

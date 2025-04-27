@@ -51,7 +51,7 @@ public class SousVide : MonoBehaviour
         while (enemy.GetComponent<EnemyStats>()._currentHealth > 0)
         {
             enemy.GetComponent<EnemyStats>()._currentHealth -= auraDamage;
-            enemy.GetComponent<EnemyStats>()._healthbar.UpdateHealthBar(enemy.GetComponent<EnemyStats>()._maxHealth, enemy.GetComponent<EnemyStats>()._currentHealth);
+            enemy.GetComponent<EnemyStats>().HealthBar.UpdateHealthBar(enemy.GetComponent<EnemyStats>().MaxHealth, enemy.GetComponent<EnemyStats>()._currentHealth);
             yield return new WaitForSeconds(1.5f);
 
             // When enemy is killed, stop coroutine

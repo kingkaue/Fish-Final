@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c52aa2f5b67caf4cb97995659522a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefabs: []
 --- !u!114 &745794181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +265,7 @@ MonoBehaviour:
   nextLevelXP: 100
   playerLevel: 1
   levelXPMult: 1.5
+  CurrentPlayer: {fileID: 0}
 --- !u!1001 &1079123773
 PrefabInstance:
   m_ObjectHideFlags: 0

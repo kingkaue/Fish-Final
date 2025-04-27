@@ -1,13 +1,11 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
-using UnityEditor.Overlays;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerData
 {
-
     public string selectedClass;
     public Vector3 playerPosition;
     public float currentHealth;
@@ -24,6 +22,7 @@ public class EnemyData
     public string enemyType;
     public Vector3 position;
     public Quaternion rotation;
+    public float currentHealth;
 }
 
 [System.Serializable]
@@ -33,189 +32,263 @@ public class GameData
     public List<EnemyData> enemyData;
 }
 
-
 public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem Instance;
 
+    [Header("Enemy Prefabs")]
+    public List<GameObject> enemyPrefabs = new List<GameObject>();
+
     private string savePath;
     private GameData currentGameData;
+    private bool isLoading = false;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            savePath = Path.Combine(Application.persistentDataPath, "gamesave.json");
         }
         else
         {
             Destroy(gameObject);
         }
+    }
 
-        savePath = Application.persistentDataPath + "/gamesave.json";
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (isLoading && currentGameData != null && scene.name == currentGameData.playerData.currentScene)
+        {
+            CompleteLoading();
+            isLoading = false;
+        }
     }
 
     public void SaveGame()
     {
-        currentGameData = new GameData();
-
-        // Save player data
-        currentGameData.playerData = new PlayerData
+        if (GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null)
         {
+            Debug.LogWarning("Cannot save - game not properly initialized");
+            return;
+        }
 
-            selectedClass = GetPlayerClass(),
-            playerPosition = GetPlayerPosition(),
-            currentHealth = GetPlayerHealth(),
-            maxHealth = GetPlayerMaxHealth(),
-            playerLevel = GameManager.instance.playerLevel,
-            xp = GameManager.instance.xp,
-            nextLevelXP = GameManager.instance.nextLevelXP,
-            currentScene = SceneManager.GetActiveScene().name
+        currentGameData = new GameData
+        {
+            playerData = new PlayerData
+            {
+                selectedClass = GetPlayerClass(),
+                playerPosition = GetPlayerPosition(),
+                currentHealth = GetPlayerHealth(),
+                maxHealth = GetPlayerMaxHealth(),
+                playerLevel = GameManager.Instance.playerLevel,
+                xp = GameManager.Instance.xp,
+                nextLevelXP = GameManager.Instance.nextLevelXP,
+                currentScene = SceneManager.GetActiveScene().name
+            },
+            enemyData = new List<EnemyData>()
         };
 
-        // Save enemy data
-        currentGameData.enemyData = new List<EnemyData>();
-        var enemies = FindObjectsOfType<EnemyStats>(); // You'll need an Enemy component on your enemies
-        foreach (var enemy in enemies)
+        SaveEnemies();
+        SaveToFile();
+    }
+
+    private void SaveEnemies()
+    {
+        foreach (var enemy in FindObjectsOfType<EnemyStats>())
         {
             currentGameData.enemyData.Add(new EnemyData
             {
-                enemyType = enemy.gameObject.name.Replace("(Clone)", "").Trim(),
+                enemyType = enemy.EnemyType,
                 position = enemy.transform.position,
-                rotation = enemy.transform.rotation
+                rotation = enemy.transform.rotation,
+                currentHealth = enemy.CurrentHealth
             });
         }
+    }
 
-        // Serialize and save to file
-        string json = JsonUtility.ToJson(currentGameData, true);
-        File.WriteAllText(savePath, json);
-
-        Debug.Log("Game saved successfully");
+    private void SaveToFile()
+    {
+        try
+        {
+            string json = JsonUtility.ToJson(currentGameData, true);
+            File.WriteAllText(savePath, json);
+            Debug.Log($"Game saved successfully to {savePath}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Save failed: {e.Message}");
+        }
     }
 
     public void LoadGame()
     {
-        if (File.Exists(savePath))
+        if (!File.Exists(savePath))
+        {
+            Debug.LogWarning("No save file found");
+            return;
+        }
+
+        try
         {
             string jsonData = File.ReadAllText(savePath);
             currentGameData = JsonUtility.FromJson<GameData>(jsonData);
 
-            // Load the scene first
             if (currentGameData.playerData.currentScene != SceneManager.GetActiveScene().name)
             {
+                isLoading = true;
                 SceneManager.LoadScene(currentGameData.playerData.currentScene);
-                // Note: You'll need to continue loading after the scene loads (see below)
-                return;
             }
-
-            // If we're already in the correct scene, load everything
-            CompleteLoading();
+            else
+            {
+                CompleteLoading();
+            }
         }
-        else
+        catch (System.Exception e)
         {
-            Debug.LogWarning("No save file found at " + savePath);
+            Debug.LogError($"Load failed: {e.Message}");
         }
     }
 
-    // Call this after the scene has finished loading
-    public void CompleteLoading()
+    private void CompleteLoading()
     {
         if (currentGameData == null) return;
 
-        // Load player data
-        var playerManager = FindObjectOfType<PlayerManager>();
-        var playerMovement = FindObjectOfType<PlayerMovement>();
-        var saveData = GetComponent<SaveData>();
+        // Load player
+        GameManager.Instance.SpawnPlayer();
+        LoadPlayerData();
 
-
-        // Set player class (you'll need to implement this based on your class selection system)
-        SetPlayerClass(currentGameData.playerData.selectedClass);
-
-        // Set player position
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            player.transform.position = currentGameData.playerData.playerPosition;
-        }
-
-        // Set player stats
-        playerManager.currentHealth = currentGameData.playerData.currentHealth;
-        playerManager.currentMaxHealth = currentGameData.playerData.maxHealth;
-        GameManager.instance.playerLevel = currentGameData.playerData.playerLevel;
-        GameManager.instance.xp = currentGameData.playerData.xp;
-        GameManager.instance.nextLevelXP = currentGameData.playerData.nextLevelXP;
-
-        // Clear existing enemies
-        var existingEnemies = FindObjectsOfType<EnemyStats>();
-        foreach (var enemy in existingEnemies)
-        {
-            Destroy(enemy.gameObject);
-        }
-
-        // Spawn saved enemies
-        foreach (var enemyData in currentGameData.enemyData)
-        {
-            GameObject enemyPrefab = GetEnemyPrefab(enemyData.enemyType);
-            if (enemyPrefab != null)
-            {
-                Instantiate(enemyPrefab, enemyData.position, enemyData.rotation);
-            }
-        }
+        // Load enemies
+        ClearExistingEnemies();
+        SpawnSavedEnemies();
 
         Debug.Log("Game loaded successfully");
     }
 
-    // Helper methods
-    private string GetPlayerClass()
+    private void LoadPlayerData()
     {
-        // Implement based on how you track the player's class
-        var playerManager = FindObjectOfType<PlayerManager>();
-        return playerManager.className;
+        var player = GameManager.Instance.CurrentPlayer;
+        if (player == null) return;
+
+        player.transform.position = currentGameData.playerData.playerPosition;
+
+        var playerManager = player.GetComponent<PlayerManager>();
+        if (playerManager != null)
+        {
+            playerManager.currentHealth = currentGameData.playerData.currentHealth;
+            playerManager.currentMaxHealth = currentGameData.playerData.maxHealth;
+            SetPlayerClass(currentGameData.playerData.selectedClass);
+        }
+
+        GameManager.Instance.playerLevel = currentGameData.playerData.playerLevel;
+        GameManager.Instance.xp = currentGameData.playerData.xp;
+        GameManager.Instance.nextLevelXP = currentGameData.playerData.nextLevelXP;
     }
 
-    private void SetPlayerClass(string className)
+    private void ClearExistingEnemies()
     {
-        // Implement based on your class selection system
-        // This might involve destroying the current class component and adding the correct one
+        foreach (var enemy in FindObjectsOfType<EnemyStats>())
+        {
+            Destroy(enemy.gameObject);
+        }
+    }
+
+    private void SpawnSavedEnemies()
+    {
+        foreach (var enemyData in currentGameData.enemyData)
+        {
+            var prefab = GetEnemyPrefab(enemyData.enemyType);
+            if (prefab == null) continue;
+
+            var enemy = Instantiate(prefab, enemyData.position, enemyData.rotation);
+            if (enemy.TryGetComponent<EnemyStats>(out var stats))
+            {
+                stats.CurrentHealth = enemyData.currentHealth;
+            }
+        }
+    }
+
+    private GameObject GetEnemyPrefab(string enemyType)
+    {
+        return enemyPrefabs.Find(x => x.name == enemyType);
+    }
+
+    private string GetPlayerClass()
+    {
+        var player = GameManager.Instance.CurrentPlayer;
+        return player != null ? player.GetComponent<PlayerManager>()?.className : "Unknown";
     }
 
     private Vector3 GetPlayerPosition()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        var player = GameManager.Instance.CurrentPlayer;
         return player != null ? player.transform.position : Vector3.zero;
     }
 
     private float GetPlayerHealth()
     {
-        var playerManager = FindObjectOfType<PlayerManager>();
-        return playerManager != null ? playerManager.currentHealth : 0;
+        var player = GameManager.Instance.CurrentPlayer;
+        return player != null ? player.GetComponent<PlayerManager>()?.currentHealth ?? 0 : 0;
     }
 
     private float GetPlayerMaxHealth()
     {
-        var playerManager = FindObjectOfType<PlayerManager>();
-        return playerManager != null ? playerManager.currentMaxHealth : 0;
+        var player = GameManager.Instance.CurrentPlayer;
+        return player != null ? player.GetComponent<PlayerManager>()?.currentMaxHealth ?? 0 : 0;
     }
 
-    private GameObject GetEnemyPrefab(string enemyType)
+    private void SetPlayerClass(string className)
     {
-        // Implement based on how you reference enemy prefabs
-        // This might involve a dictionary or switch statement
-        return null;
-    }
+        var player = GameManager.Instance.CurrentPlayer;
+        if (player == null) return;
 
-    // For testing - remove in final version
+        // Remove existing class components
+        var classComponents = player.GetComponents<CharacterClass>();
+        foreach (var component in classComponents)
+        {
+            Destroy(component);
+        }
+
+        // Add and initialize new class
+        switch (className)
+        {
+            case "Mage":
+                player.AddComponent<CharacterClass_Mage>();
+                break;
+            case "Rogue":
+                player.AddComponent<CharacterClass_Rogue>();
+                break;
+            case "Fighter":
+                player.AddComponent<CharacterClass_FIghter>();
+                break;
+        }
+
+        // Update player manager
+        var playerManager = player.GetComponent<PlayerManager>();
+        if (playerManager != null)
+        {
+            playerManager.className = className;
+        }
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F5))
         {
             SaveGame();
+            Debug.Log("Saved Game");
         }
 
         if (Input.GetKeyDown(KeyCode.F9))
         {
             LoadGame();
+            Debug.Log("Loaded Game");
         }
     }
 }

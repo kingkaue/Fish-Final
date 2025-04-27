@@ -425,10 +425,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98827bc4621e1454eafd8c210640b313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 30
+  EnemyType: BasicEnemy
+  MaxHealth: 10
   _currentHealth: 30
-  _healthbar: {fileID: 1332968602155121683}
-  collectable: {fileID: 256857959058603805, guid: 5e1564e87b1b07443954f45592c9c8f9, type: 3}
+  HealthBar: {fileID: 1332968602155121683}
+  CollectableDrop: {fileID: 0}
   stoppingDistance: 1.5
 --- !u!65 &2871721963453175347
 BoxCollider:
