@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
     
     public GameObject playerPrefab, EnemyPrefab;
     GameObject enemyParent;
-    float timer;
-    int xp = 0;
-    int nextLevelXP = 100;
+    public float timer;
+    public int xp = 0;
+   public int nextLevelXP = 100;
     public int playerLevel = 1;
     public float levelXPMult = 1.5f;
 

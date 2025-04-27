@@ -14,8 +14,8 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Health Management")]
     [SerializeField] float baseMaxHealth;
-    [SerializeField] float currentMaxHealth;
-    [SerializeField] float currentHealth;
+    [SerializeField] public float currentMaxHealth;
+    [SerializeField] public float currentHealth;
     public float healthMultiplier;
 
     [Header("Damage Management")]
