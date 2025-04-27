@@ -152,8 +152,10 @@ public class PlayerManager : MonoBehaviour
                 throw new System.ArgumentException("Heal percentage cannot be negative", nameof(percentageOfMaxHealth));
             }
 
+            OnPlayerDamaged?.Invoke(0f, currentHealth, currentMaxHealth);
             currentHealth = currentHealth + (currentMaxHealth * percentageOfMaxHealth);
             Debug.Log($"Player healed by {percentageOfMaxHealth * 100}%");
+
         }
         catch (System.ArgumentException ex)
         {

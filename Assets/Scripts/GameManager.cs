@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,11 +10,12 @@ public class GameManager : MonoBehaviour
     GameObject enemyParent;
     public float timer;
     public int xp = 0;
-   public int nextLevelXP = 100;
+    public int nextLevelXP = 100;
     public int playerLevel = 1;
     public float levelXPMult = 1.5f;
     public GameObject CurrentPlayer;
 
+    public event Action<int> OnLeveledUp;
 
     private void Awake()
     {
@@ -76,7 +78,7 @@ public class GameManager : MonoBehaviour
         GameObject enemy = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         enemy.transform.parent = enemyParent.transform;
 
-        enemy.transform.position = new Vector3(Random.Range(-20f, 20f), 0.5f, Random.Range(-20f, 20f));
+        enemy.transform.position = new Vector3(UnityEngine.Random.Range(-20f, 20f), 0.5f, UnityEngine.Random.Range(-20f, 20f));
     }
 
     void GenerateLevel()
@@ -92,7 +94,7 @@ public class GameManager : MonoBehaviour
         {
             cubes[i] = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cubes[i].transform.parent = cubeParent.transform;
-            cubes[i].transform.position = new Vector3(Random.Range(-20f, 20f), 0.5f, Random.Range(-20f, 20f));
+            cubes[i].transform.position = new Vector3(UnityEngine.Random.Range(-20f, 20f), 0.5f, UnityEngine.Random.Range(-20f, 20f));
         }
     }
 
@@ -106,16 +108,20 @@ public class GameManager : MonoBehaviour
 
     void LevelUp()
     {
-        //handle level up actions
-
-        //set next level up conditions
         playerLevel++;
 
-        if (playerLevel % 5 == 0) AddAugment();
+        if (playerLevel % 5 == 0)
+        {
+            AddAugment();
+            Debug.Log("The Player has gained an augment!");
+        }
+            
 
         nextLevelXP += (int)(nextLevelXP * levelXPMult);
 
-        //check for multiple level ups
+        // Fire event:
+        OnLeveledUp?.Invoke(playerLevel);
+
         CheckLevelUp();
         Debug.Log("The Player has leveled up!");
     }
@@ -132,7 +138,7 @@ public class GameManager : MonoBehaviour
 
     void AddAugment()
     {
-
+        // TODO
     }
 
     //track character selection
