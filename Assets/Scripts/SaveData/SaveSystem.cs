@@ -162,9 +162,17 @@ public class SaveSystem : MonoBehaviour
         if (currentGameData == null) return;
 
         // Load player
-        GameManager.Instance.SpawnPlayer();
+        GameManager.Instance.SpawnPlayer(currentGameData.playerData.playerPosition);
         LoadPlayerData();
-
+        // Load player with saved position
+        if (GameManager.Instance.CurrentPlayer == null)
+        {
+            GameManager.Instance.SpawnPlayer(currentGameData.playerData.playerPosition);
+        }
+        else
+        {
+            GameManager.Instance.CurrentPlayer.transform.position = currentGameData.playerData.playerPosition;
+        }
         // Load enemies
         ClearExistingEnemies();
         SpawnSavedEnemies();

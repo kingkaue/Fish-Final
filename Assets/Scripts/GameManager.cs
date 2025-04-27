@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     void InitializeGame()
     {
         enemyParent = new GameObject("Enemies");
-        SpawnPlayer();
+        SpawnPlayer(new Vector3(0, 1, 0));
         // Any other initialization code
     }
 
@@ -47,19 +48,26 @@ public class GameManager : MonoBehaviour
         //Debug.Log(timer);
     }
 
-    public void SpawnPlayer()
+    public void SpawnPlayer(Vector3 position)
     {
         if (playerPrefab != null)
         {
-            CurrentPlayer = Instantiate(playerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+            // Destroy existing player if one exists
+            if (CurrentPlayer != null)
+            {
+                Destroy(CurrentPlayer);
+            }
+
+            CurrentPlayer = Instantiate(playerPrefab, position, Quaternion.identity);
             CurrentPlayer.name = "Player";
-            CurrentPlayer.tag = "Player"; // Critical for save system
+            CurrentPlayer.tag = "Player";
+            Debug.Log($"Player spawned at: {position}");
         }
         else
         {
             Debug.LogError("Player prefab not assigned in GameManager!");
         }
-        
+
     }
 
     void SpawnEnemy()
