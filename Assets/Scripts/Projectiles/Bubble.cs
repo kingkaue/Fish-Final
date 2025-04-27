@@ -1,5 +1,8 @@
-//using Unity.Android.Gradle;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+
 
 public class Bubble : MonoBehaviour
 {
@@ -7,7 +10,7 @@ public class Bubble : MonoBehaviour
     public float splashDamageRadius = 4f;
     public float splashDamage;
 
-    [Header ("Split Shot")]
+    [Header("Split Shot")]
     [SerializeField] Transform splitOrigin;
     [SerializeField] GameObject bubblePrefab;
     [SerializeField] float spreadAngle;
@@ -25,7 +28,7 @@ public class Bubble : MonoBehaviour
     {
         // Checks to see if there are other enemies in splash damage range
         Collider[] enemyColliders = Physics.OverlapSphere(transform.position, splashDamageRadius);
-        foreach(Collider c in enemyColliders)
+        foreach (Collider c in enemyColliders)
         {
             // Deals damage to enemies in range
             if (c.tag == "Enemy" && c != hitEnemy)
@@ -52,6 +55,13 @@ public class Bubble : MonoBehaviour
             {
                 SplitShot(other);
             }
+            if (isBubbleBurn == true)
+            {
+                if (other.GetComponent<EnemyStats>() != null)
+                {
+                    other.GetComponent<EnemyStats>().ApplyBubbleBurn(coreDamage / 10, 1.5f);
+                }
+            }
             Destroy(this.gameObject);
         }
     }
@@ -59,6 +69,11 @@ public class Bubble : MonoBehaviour
     public void ActivateSplit()
     {
         isSplit = true;
+    }
+
+    public void ActivateBurn()
+    {
+        isBubbleBurn = true;
     }
 
     void SplitShot(Collider hitEnemy)

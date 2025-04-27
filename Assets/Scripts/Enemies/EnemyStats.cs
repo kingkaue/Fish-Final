@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -112,7 +114,30 @@ public class EnemyStats : MonoBehaviour
             CurrentHealth = this.CurrentHealth
         };
     }
+
+    public void ApplyBubbleBurn(float damage, float duration)
+    {
+        Debug.Log("Applying burn");
+        StartCoroutine(HandleBurn(damage, duration));
+    }
+
+    private IEnumerator HandleBurn(float damage, float duration)
+    {
+        float tickInterval = 0.5f;
+        int ticks = Mathf.FloorToInt(duration / tickInterval);
+
+        for (int i = 0; i < ticks; i++)
+        {
+            if (this != null)
+            {
+                _currentHealth -= damage;
+                HealthBar.UpdateHealthBar(MaxHealth, _currentHealth);
+                yield return new WaitForSeconds(tickInterval);
+            }
+        }
+    }
 }
+
 
 // For save system (could be in a separate file)
 [System.Serializable]

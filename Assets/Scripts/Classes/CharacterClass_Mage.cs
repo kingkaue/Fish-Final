@@ -9,6 +9,7 @@ public class CharacterClass_Mage : CharacterClass
     public float bubbleSpeed = 5f;
     public float fireRate = 0.5f;
     public bool splitShotActivated = false;
+    public bool bubbleBurnActivated = false;
 
     private float nextFireTime = 0f;
     private PlayerInput playerInput;
@@ -21,15 +22,12 @@ public class CharacterClass_Mage : CharacterClass
         GetComponent<PlayerManager>().className = className;
 
         // Health and damage managed inside PlayerManager script so sets variables there
-        classBaseMaxHealth = 150;
         GetComponent<PlayerManager>().InitializeHealth(classBaseMaxHealth);
 
-        classBaseAttackDamage = 10;
         GetComponent<PlayerManager>().baseAttackDamage = classBaseAttackDamage; // Sets class base damage as starting damage
         GetComponent<PlayerManager>().SetAttackDamage(1, classBaseAttackDamage);
 
         // Speed managed in PlayerMovement script so sets variables there
-        moveSpeed = 12;
         GetComponent<PlayerMovement>().speed = moveSpeed;
 
         playerInput = GetComponent<PlayerInput>();
@@ -59,7 +57,6 @@ public class CharacterClass_Mage : CharacterClass
             {
                 ShootBubble();
                 nextFireTime = Time.time + fireRate;
-                Debug.Log("Shooting bubble towards " + aim.x + " " + aim.z);
             }
         }
         else
@@ -97,10 +94,12 @@ public class CharacterClass_Mage : CharacterClass
             bubble.GetComponent<Bubble>().ActivateSplit();
             Debug.Log("isSplit = true");
         }
+        if (bubbleBurnActivated == true)
+        {
+            bubble.GetComponent<Bubble>().ActivateBurn();
+        }
         Rigidbody bubbleRb = bubble.GetComponent<Rigidbody>();
         bubbleRb.linearVelocity = direction * bubbleSpeed;
-        Debug.Log("Bubble Speed is " + bubbleRb.linearVelocity);
-        Debug.Log("Bubble Direction is " + direction);
     }
 
 }

@@ -85,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7105274834985291793, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_Name
-      value: Rogue Variant
+      value: Rogue
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -342,9 +342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   className: 
-  maxHealth: 0
-  moveSpeed: 0
-  attackDamage: 0
+  classBaseMaxHealth: 200
+  moveSpeed: 10
+  classBaseAttackDamage: 8
   aim: {x: 0, y: 0, z: 0}
   isPC: 0
   daggerPrefab: {fileID: 9171458857002247564, guid: 4f09b23fe934ea843adf04222418d79b, type: 3}
@@ -368,7 +368,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2740fffb36c2a9f488b4407223cf0e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  className: 
+  baseMaxHealth: 0
+  currentMaxHealth: 0
   currentHealth: 0
+  healthMultiplier: 0
+  baseAttackDamage: 0
+  attackDamage: 0
+  damageMultiplier: 0
+  isInvincible: 0
 --- !u!54 &6191383920527109701
 Rigidbody:
   m_ObjectHideFlags: 0

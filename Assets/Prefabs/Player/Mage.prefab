@@ -346,15 +346,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   className: 
-  classBaseMaxHealth: 0
-  moveSpeed: 0
-  classBaseAttackDamage: 0
+  classBaseMaxHealth: 150
+  moveSpeed: 12
+  classBaseAttackDamage: 10
   aim: {x: 0, y: 0, z: 0}
   isPC: 1
   bubblePrefab: {fileID: 2486822060649500248, guid: babd1d60db6741f4e9d96056d4f66cf0, type: 3}
   bubbleOrigin: {fileID: 5988955067952814795}
   bubbleSpeed: 20
   fireRate: 0.5
+  splitShotActivated: 0
+  bubbleBurnActivated: 0
 --- !u!136 &9195889803381828905
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -390,6 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2740fffb36c2a9f488b4407223cf0e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  className: 
   baseMaxHealth: 0
   currentMaxHealth: 0
   currentHealth: 0

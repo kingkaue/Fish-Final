@@ -22,15 +22,12 @@ public class CharacterClass_FIghter : CharacterClass
         GetComponent<PlayerManager>().className = className;
 
         // Health and damage managed inside PlayerManager script so sets variables there
-        classBaseMaxHealth = 250;
         GetComponent<PlayerManager>().InitializeHealth(classBaseMaxHealth);
 
-        classBaseAttackDamage = 8;
         GetComponent<PlayerManager>().baseAttackDamage = classBaseAttackDamage; // Sets class base damage as starting damage
         GetComponent<PlayerManager>().SetAttackDamage(1, classBaseAttackDamage);
 
         // Speed managed in PlayerMovement script so sets variables there
-        moveSpeed = 10;
         GetComponent<PlayerMovement>().speed = moveSpeed;
 
         playerInput = GetComponent<PlayerInput>();

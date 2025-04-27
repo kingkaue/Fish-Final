@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyType: BasicEnemy
-  MaxHealth: 10
+  MaxHealth: 30
   _currentHealth: 30
   HealthBar: {fileID: 1332968602155121683}
   CollectableDrop: {fileID: 0}

@@ -458,9 +458,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   className: 
-  classBaseMaxHealth: 0
-  moveSpeed: 0
-  classBaseAttackDamage: 0
+  classBaseMaxHealth: 250
+  moveSpeed: 10
+  classBaseAttackDamage: 8
   aim: {x: 0, y: 0, z: 0}
   isPC: 1
   fireRate: 0.7
@@ -478,6 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2740fffb36c2a9f488b4407223cf0e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  className: 
   baseMaxHealth: 0
   currentMaxHealth: 0
   currentHealth: 0
@@ -485,6 +486,7 @@ MonoBehaviour:
   baseAttackDamage: 0
   attackDamage: 0
   damageMultiplier: 0
+  isInvincible: 0
 --- !u!1001 &4915767293109517974
 PrefabInstance:
   m_ObjectHideFlags: 0
