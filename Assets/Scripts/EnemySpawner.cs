@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     public float spawnDelay = 2f;
     private GameManager gameManager;
     private GenerateGrid gridGenerator; // Reference to your grid generator
+    public GameObject BossEnemy;
 
     void Start()
     {
@@ -72,6 +73,10 @@ public class EnemySpawner : MonoBehaviour
                 {
                     SpawnEnemy(enemyPrefab2);
                     yield return new WaitForSeconds(0.5f); //spawn delay of 0.5 seconds as opposed to 2
+                }
+                if(Random.Range(0, 15) == 15)
+                {
+                    SpawnEnemy(BossEnemy);
                 }
             }
         }
