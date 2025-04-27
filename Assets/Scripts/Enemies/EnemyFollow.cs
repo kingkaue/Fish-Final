@@ -21,13 +21,13 @@ public class EnemyFollow : MonoBehaviour
         agent.SetDestination(destination.transform.position);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            if (other.GetComponent<PlayerManager>().isInvincible == false)
+            if (other.gameObject.GetComponent<PlayerManager>().isInvincible == false)
             {
-                other.GetComponent<PlayerManager>().TakeDamage(10);
+                other.gameObject.GetComponent<PlayerManager>().TakeDamage(10);
                 Debug.Log("Dealt damage to player");
             }
         }

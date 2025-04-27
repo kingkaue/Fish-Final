@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5607521214430449638}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.18, z: 1.01}
+  m_LocalPosition: {x: 0, y: 0.71, z: 1.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,15 +41,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 49536060347078348, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 63.4
       objectReference: {fileID: 0}
     - target: {fileID: 49536060347078348, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 9.84
       objectReference: {fileID: 0}
     - target: {fileID: 49536060347078348, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 42.874
       objectReference: {fileID: 0}
     - target: {fileID: 49536060347078348, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -79,8 +79,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1344551611585959222, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2676517061990448352, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: isPC
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104340936563640995, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7105274834985291793, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
@@ -253,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.size
@@ -264,9 +272,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6776735735166762730}
+    - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5752757423069986186}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -276,12 +292,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnDash
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DropBomb
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -296,6 +320,10 @@ PrefabInstance:
       value: PlayerMovement, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CharacterClass_Rogue, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerMovement, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -304,10 +332,15 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3104340936563640995, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 49536060347078348, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
@@ -351,12 +384,13 @@ MonoBehaviour:
   daggerOrigin: {fileID: 2087012588921142393}
   daggerSpeed: 15
   fireRate: 0.7
-  numDaggers: 20
+  numDaggers: 2
   spreadAngle: 30
   dashSpeed: 75
   dashDuration: 0.25
   dashCooldown: 1
   bombDrop: 0
+  canDropbomb: 1
   bomb: {fileID: 8024373681229419238, guid: 5aa44ba93fd7328418175c4c01d2c6ef, type: 3}
 --- !u!114 &7349703784071301321
 MonoBehaviour:

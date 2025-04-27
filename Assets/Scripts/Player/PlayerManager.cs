@@ -104,6 +104,10 @@ public class PlayerManager : MonoBehaviour
     public void SetBaseDamage(float baseAdd)
     {
         baseAttackDamage = baseAttackDamage + baseAdd;
+        if (attackDamage < baseAttackDamage)
+        {
+            attackDamage = baseAttackDamage;
+        }
     }
 
     public void SetAttackDamage(float multiplier, float baseDamage)
@@ -193,5 +197,13 @@ public class PlayerManager : MonoBehaviour
         isInvincible = true;
         yield return new WaitForSeconds(duration);
         isInvincible = false;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
+        }
     }
 }

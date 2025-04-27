@@ -72,7 +72,6 @@ public class CharacterClass_Rogue : CharacterClass
             {
                 ShootDaggers();
                 nextFireTime = Time.time + fireRate;
-                Debug.Log("Shooting bubble towards " + aim.x + " " + aim.z);
             }
         }
         else
@@ -118,7 +117,7 @@ public class CharacterClass_Rogue : CharacterClass
 
             // Shoots dagger at certain angle
             daggerOrigin.transform.Rotate(0, angle, 0);
-            GameObject dagger = Instantiate(daggerPrefab, daggerOrigin.position, Quaternion.identity);
+            GameObject dagger = Instantiate(daggerPrefab, daggerOrigin.position, daggerOrigin.rotation);
             Rigidbody daggerRb = dagger.GetComponent<Rigidbody>();
             daggerRb.AddForce(daggerOrigin.transform.forward * 500);
 

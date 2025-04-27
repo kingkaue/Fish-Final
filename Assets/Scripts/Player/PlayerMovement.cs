@@ -196,11 +196,15 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         GetComponent<PlayerManager>().isInvincible = true;
 
+        RigidbodyConstraints originalConstraints = rb.constraints;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
         Vector3 dashDirection = new Vector3(move.x, 0f, move.y).normalized;
         rb.linearVelocity = dashDirection * dashSpeed;
 
         // Dashes and sets invincibility for dashDuration amount of seconds
         yield return new WaitForSeconds(dashDuration);
+        rb.constraints = originalConstraints;
         rogueScript.canDropbomb = false;
         isDashing = false;
         GetComponent<PlayerManager>().isInvincible = false;
