@@ -34,6 +34,7 @@ Transform:
   - {fileID: 390649864450180733}
   - {fileID: 1598373669911552130}
   - {fileID: 2372784302520463289}
+  - {fileID: 8232145963322869773}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &934322332177433063
@@ -149,6 +150,10 @@ PrefabInstance:
     - target: {fileID: 6735757219701397128, guid: a217682a9924f0c49a976234cca477ab, type: 3}
       propertyPath: m_Name
       value: Bubble Burn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6735757219701397128, guid: a217682a9924f0c49a976234cca477ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -283,6 +288,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6847608368212251306, guid: 139df714b52ac77468ff4c666150d762, type: 3}
   m_PrefabInstance: {fileID: 5271753521109332520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6511416132494475116
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1304754182057741821}
+    m_Modifications:
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436082993051323040, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_Name
+      value: Bomb Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436082993051323040, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+--- !u!4 &8232145963322869773 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2910248237981120353, guid: 4345da5f28b82b442b6d2f245513a13f, type: 3}
+  m_PrefabInstance: {fileID: 6511416132494475116}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8042220307147757383
 PrefabInstance:

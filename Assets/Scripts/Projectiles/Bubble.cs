@@ -59,7 +59,7 @@ public class Bubble : MonoBehaviour
             {
                 if (other.GetComponent<EnemyStats>() != null)
                 {
-                    other.GetComponent<EnemyStats>().ApplyBubbleBurn(coreDamage / 10, 1.5f);
+                    other.GetComponent<EnemyStats>().ApplyBubbleBurn(coreDamage / 10, 3f);
                 }
             }
             Destroy(this.gameObject);

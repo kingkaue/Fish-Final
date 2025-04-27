@@ -88,7 +88,7 @@ public class EnemyStats : MonoBehaviour
         // Play death animation
         if (_animator != null)
         {
-            _animator.SetBool("IsDead", true);
+            _animator.SetBool("isdead", true);
         }
 
         // Disable collider and agent

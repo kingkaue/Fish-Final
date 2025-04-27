@@ -17,7 +17,7 @@ public class HealthBarScript : MonoBehaviour
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
         _target = currentHealth / maxHealth;
-        Debug.Log("Health bar target updated: " + _target); // Log the target value
+        Debug.Log("Health at " + currentHealth); // Log the target value
     }
 
     private void Update()

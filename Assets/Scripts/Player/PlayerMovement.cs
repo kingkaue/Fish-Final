@@ -201,12 +201,14 @@ public class PlayerMovement : MonoBehaviour
 
         // Dashes and sets invincibility for dashDuration amount of seconds
         yield return new WaitForSeconds(dashDuration);
+        rogueScript.canDropbomb = false;
         isDashing = false;
         GetComponent<PlayerManager>().isInvincible = false;
 
         // Manages dash cooldown
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+        rogueScript.canDropbomb = true;
     }
 
 

@@ -25,6 +25,11 @@ public class CharacterClass_Rogue : CharacterClass
     public float dashDuration = 0.25f;
     public float dashCooldown = 1f;
 
+    [Header ("Augments")]
+    public bool bombDrop = false;
+    public bool canDropbomb = true;
+    [SerializeField] GameObject bomb;
+
     private void Start()
     {
         // Setting base stats
@@ -119,6 +124,16 @@ public class CharacterClass_Rogue : CharacterClass
 
             // Resets rotation of dagggerOrigin to work properly
             daggerOrigin.rotation = originalRotation;
+        }
+    }
+
+    public void DropBomb()
+    {
+        if (bombDrop && canDropbomb)
+        {
+            Debug.Log("Dropping bomb");
+            Instantiate(bomb, transform.position, transform.rotation);
+            canDropbomb = false;
         }
     }
 }

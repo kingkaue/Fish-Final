@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505c00d0c009b55498b2f9cfab12e465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPC: 0
+  isPC: 1
   speed: 8
   aimDirection: {x: 0, y: 0, z: 0}
 --- !u!95 &3135800326678132669

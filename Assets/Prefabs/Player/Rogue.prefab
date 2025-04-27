@@ -81,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2676517061990448352, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: isPC
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7105274834985291793, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_Name
@@ -346,7 +346,7 @@ MonoBehaviour:
   moveSpeed: 10
   classBaseAttackDamage: 8
   aim: {x: 0, y: 0, z: 0}
-  isPC: 0
+  isPC: 1
   daggerPrefab: {fileID: 9171458857002247564, guid: 4f09b23fe934ea843adf04222418d79b, type: 3}
   daggerOrigin: {fileID: 2087012588921142393}
   daggerSpeed: 15
@@ -356,6 +356,8 @@ MonoBehaviour:
   dashSpeed: 75
   dashDuration: 0.25
   dashCooldown: 1
+  bombDrop: 0
+  bomb: {fileID: 8024373681229419238, guid: 5aa44ba93fd7328418175c4c01d2c6ef, type: 3}
 --- !u!114 &7349703784071301321
 MonoBehaviour:
   m_ObjectHideFlags: 0
