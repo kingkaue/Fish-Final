@@ -5,24 +5,25 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour
 {
     public float maxEnemies = 1000;
-    private float playerLevel = 1;
+    private float playerLevell = 1;
     public GameObject enemyPrefab;
     public GameObject enemyPrefab2;
     public float spawnHeightAboveGrid = 1.5f;
     public float spawnRadius = 50f;
     public float spawnDelay = 2f;
-
+    private GameManager gameManager;
     private GenerateGrid gridGenerator; // Reference to your grid generator
 
     void Start()
     {
+        gameManager = GetComponent<GameManager>();
         gridGenerator = FindObjectOfType<GenerateGrid>();
         if (gridGenerator == null)
         {
             Debug.LogError("No GenerateGrid found in scene!");
             return;
         }
-
+        
         StartCoroutine(EnemySpawnerRoutine());
     }
 
@@ -30,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitUntil(() => gridGenerator.blockPositions.Count > 0); // Wait for grid generation
 
-        if (playerLevel == 1)
+        if (GameManager.instance.playerLevel == 1)
         {
             for (int j = 0; j <= maxEnemies; j++)
             {
@@ -41,6 +42,36 @@ public class EnemySpawner : MonoBehaviour
                 {
                     SpawnEnemy(enemyPrefab2);
                     yield return new WaitForSeconds(spawnDelay);
+                }
+            }
+        }
+
+        if (GameManager.instance.playerLevel == 2)
+        {
+            for (int j = 0; j <= maxEnemies; j++)
+            {
+                SpawnEnemy(enemyPrefab);
+                yield return new WaitForSeconds(spawnDelay);
+
+                if (Random.Range(0, 5) == 5) // 1 in 5 chance
+                {
+                    SpawnEnemy(enemyPrefab2);
+                    yield return new WaitForSeconds(spawnDelay - 1f); //spawn delay of 1 seconds as opposed to 2
+                }
+            }
+        }
+
+        if (GameManager.instance.playerLevel == 3)
+        {
+            for (int j = 0; j <= maxEnemies; j++)
+            {
+                SpawnEnemy(enemyPrefab);
+                yield return new WaitForSeconds(spawnDelay);
+
+                if (Random.Range(0, 3) == 3) // 1 in 5 chance
+                {
+                    SpawnEnemy(enemyPrefab2);
+                    yield return new WaitForSeconds(0.5f); //spawn delay of 0.5 seconds as opposed to 2
                 }
             }
         }

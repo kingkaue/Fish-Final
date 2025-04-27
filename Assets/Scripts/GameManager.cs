@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     float timer;
     int xp = 0;
     int nextLevelXP = 100;
-    int playerLevel = 1;
+    public int playerLevel = 1;
     public float levelXPMult = 1.5f;
 
 
@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
 
         //check for multiple level ups
         CheckLevelUp();
+        Debug.Log("The Player has leveled up!");
     }
 
     void CheckLevelUp()
