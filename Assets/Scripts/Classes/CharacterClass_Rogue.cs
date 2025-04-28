@@ -136,4 +136,24 @@ public class CharacterClass_Rogue : CharacterClass
             canDropbomb = false;
         }
     }
+
+    public void AddDagger()
+    {
+        numDaggers++;
+    }
+
+    public void IncreaseFireRate()
+    {
+        fireRate = fireRate - 0.1f;
+    }
+
+    public void IncreaseShotSpeed()
+    {
+        daggerSpeed++;
+    }
+
+    public void DashCooldownDecrease()
+    {
+        dashCooldown -= 0.1f;
+    }
 }

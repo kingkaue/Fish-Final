@@ -8,6 +8,10 @@ public class LevelUpPopup : MonoBehaviour
     GameManager gm;
     PlayerManager pm;
 
+    [SerializeField] private GameObject[] allUpgradeButtons;
+    private GameObject[] currentSelection = new GameObject[3];
+    [SerializeField] private GameObject[] availableUpgradeButtons;
+
     void Awake()
     {
         // make sure the panel is invisible, but the GO stays active
@@ -21,6 +25,7 @@ public class LevelUpPopup : MonoBehaviour
         // now the GameObject is definitely active, subscribe here
         gm = GameManager.Instance;
         pm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
+        availableUpgradeButtons = (GameObject[])allUpgradeButtons.Clone();
 
         if (gm != null)
         {
@@ -55,9 +60,40 @@ public class LevelUpPopup : MonoBehaviour
         {
             Debug.Log($"LevelUpPopup: ShowPopup fired for level {newLevel}");
             Time.timeScale = 0f;
+            ShowUpgrades();
             popupGroup.alpha = 1f;
             popupGroup.interactable = true;
             popupGroup.blocksRaycasts = true;
+        }
+    }
+
+    public void ShowUpgrades()
+    {
+        // Deactivates all buttons
+        foreach (var button in allUpgradeButtons)
+        {
+            button.SetActive(false);
+        }
+
+        if (allUpgradeButtons.Length < 3)
+        {
+            Debug.Log("Less than 3 upgrades");
+            availableUpgradeButtons = (GameObject[])allUpgradeButtons.Clone();
+        }
+
+        // Chooses 3 random augments from available augments to display
+        for (int i = 0; i < availableUpgradeButtons.Length; i++)
+        {
+            int swapIndex = UnityEngine.Random.Range(i, availableUpgradeButtons.Length);
+            GameObject temp = availableUpgradeButtons[i];
+            availableUpgradeButtons[i] = availableUpgradeButtons[swapIndex];
+            availableUpgradeButtons[swapIndex] = temp;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            currentSelection[i] = availableUpgradeButtons[i];
+            currentSelection[i].SetActive(true);
         }
     }
 
@@ -83,7 +119,7 @@ public class LevelUpPopup : MonoBehaviour
         Close();
     }
 
-    void Close()
+    public void Close()
     {
         popupGroup.alpha = 0f;
         popupGroup.interactable = false;
