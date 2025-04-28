@@ -100,7 +100,7 @@ public class LevelUpPopup : MonoBehaviour
     public void OnHealthUpgrade()
     {
 
-        pm.MultiplyMaxHealth(1.2f);
+        pm.SetHealthMultiplier(1.2f);
         Close();
 
     }
@@ -115,7 +115,11 @@ public class LevelUpPopup : MonoBehaviour
     public void OnSpeedUpgrade()
     {
         var cc = pm.gameObject.GetComponent<PlayerMovement>();
-        if (cc != null) cc.speed *= 1.2f;
+        if (cc != null)
+        {
+            cc.speed *= 1.2f;
+            pm.SetSpeedMultipler(1.2f);
+        } 
         Close();
     }
 

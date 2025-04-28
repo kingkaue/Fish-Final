@@ -1,5 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -63,10 +65,31 @@ public class PlayerManager : MonoBehaviour
     public float damageMultiplier;
     public bool isInvincible;
 
+    [Header("Speed Management")]
+    public float speedMultiplier;
+
+    [Header("Stats UI")]
+    public TMP_Text healthMultUI;
+    public TMP_Text damageMultUI;
+    public TMP_Text speedMultUI;
+
+
     void Start()
     {
         Debug.Log("Player Health is " + currentHealth);
+
+        //set default mult values
         damageMultiplier = 1.0f;
+        speedMultiplier = 1f;
+        healthMultiplier = 1f;
+
+        //find stats ui in scene
+        healthMultUI = GameObject.Find("Health Multiplier UI").GetComponent<TMP_Text>();
+        damageMultUI = GameObject.Find("Damage Multiplier UI").GetComponent<TMP_Text>();
+        speedMultUI = GameObject.Find("Speed Multiplier UI").GetComponent<TMP_Text>();
+
+        //update stats UI
+        UpdateStatsUI();
     }
 
     void Update()
@@ -99,6 +122,7 @@ public class PlayerManager : MonoBehaviour
         {
             damageMultiplier = damageMultiplier * damageMultiplierAdd;
         }
+        UpdateStatsUI();
     }
 
     public void SetBaseDamage(float baseAdd)
@@ -130,6 +154,7 @@ public class PlayerManager : MonoBehaviour
     {
         healthMultiplier = healthMultiplier * healthMultiplierAdd;
         MultiplyMaxHealth(healthMultiplier);
+        UpdateStatsUI();
     }
 
     public void MultiplyMaxHealth(float healthmult)
@@ -146,6 +171,12 @@ public class PlayerManager : MonoBehaviour
         {
             currentHealth = currentMaxHealth;
         }
+    }
+
+    public void SetSpeedMultipler(float speedMult)
+    {
+        speedMultiplier *= speedMult;
+        UpdateStatsUI();
     }
 
     public void Heal(float percentageOfMaxHealth)
@@ -191,6 +222,14 @@ public class PlayerManager : MonoBehaviour
             // Recover by not taking damage
             currentHealth = currentHealth - 0;
         }
+    }
+
+    public void UpdateStatsUI()
+    {
+        healthMultUI.text = $"Health Mult: {healthMultiplier}x";
+        damageMultUI.text = $"Damage Mult: {damageMultiplier}x";
+        speedMultUI.text = $"Speed Mult: {speedMultiplier}x";
+        //Debug.Log("Updated stats ui");
     }
 
     private IEnumerator InvincibilityFrames(float duration)
