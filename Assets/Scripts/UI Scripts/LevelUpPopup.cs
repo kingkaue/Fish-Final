@@ -41,6 +41,7 @@ public class LevelUpPopup : MonoBehaviour
 
     void ShowPopup(int newLevel)
     {
+        // Every 5 levels shows augment menu
         if (newLevel % 5 == 0)
         {
             Debug.Log($"LevelUpPopup: ShowPopup fired for level {newLevel}");
@@ -90,6 +91,7 @@ public class LevelUpPopup : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    // Called on button click
     public void CloseAugmentPopup()
     {
         augmentGroup.alpha = 0f;

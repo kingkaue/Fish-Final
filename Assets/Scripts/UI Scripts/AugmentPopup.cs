@@ -12,11 +12,13 @@ public class AugmentPopup : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Initializes available augments
         availableAugmentButtons = (GameObject[])allAugmentButtons.Clone();
     }
 
     public void ShowAugments()
     {
+        // Deactivates all buttons
         foreach (var button in allAugmentButtons)
         {
             button.SetActive(false);
@@ -26,7 +28,8 @@ public class AugmentPopup : MonoBehaviour
         {
             Debug.Log("Less than 3 augments");
         }
-        
+
+        // Chooses 3 random augments from available augments to display
         for (int i = 0; i < 3; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, availableAugmentButtons.Length);
@@ -36,6 +39,7 @@ public class AugmentPopup : MonoBehaviour
         }
     }
 
+    // Removes selected augment from available augments
     public void SelectAugment(GameObject chosenAugmentButton)
     {
         chosenAugmentButton.SetActive(false);
@@ -43,6 +47,7 @@ public class AugmentPopup : MonoBehaviour
         availableAugmentButtons = Array.FindAll(availableAugmentButtons, a => a != chosenAugmentButton);
     }
 
+    // Unused augments are readded to available augments
     private void RestoreUnusedAugments()
     {
         if (currentSelection[0] != null)
