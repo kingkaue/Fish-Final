@@ -545,7 +545,7 @@ MonoBehaviour:
   MaxHealth: 10
   _currentHealth: 0
   HealthBar: {fileID: 1362305815665070158}
-  CollectableDrop: {fileID: 0}
+  CollectableDrop: {fileID: 2040489371263998314, guid: c5c89b4ebf9ab104db2fb7200b703641, type: 3}
   stoppingDistance: 1.5
 --- !u!65 &3188497025692931908
 BoxCollider:

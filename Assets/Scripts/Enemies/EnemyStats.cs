@@ -82,6 +82,7 @@ public class EnemyStats : MonoBehaviour
         // Drop collectable if specified
         if (CollectableDrop != null)
         {
+            Debug.Log($"Spawning collectable at position: {transform.position}");
             Instantiate(CollectableDrop, transform.position, Quaternion.identity);
         }
 
