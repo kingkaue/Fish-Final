@@ -529,11 +529,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6135363503257131498, guid: a3a96bef539ea2844a81ecf28fab2771, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.332
       objectReference: {fileID: 0}
     - target: {fileID: 6135363503257131498, guid: a3a96bef539ea2844a81ecf28fab2771, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6135363503257131498, guid: a3a96bef539ea2844a81ecf28fab2771, type: 3}
       propertyPath: m_LocalPosition.x
@@ -545,11 +545,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7194514805269316432, guid: a3a96bef539ea2844a81ecf28fab2771, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.332
       objectReference: {fileID: 0}
     - target: {fileID: 7194514805269316432, guid: a3a96bef539ea2844a81ecf28fab2771, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7194514805269316432, guid: a3a96bef539ea2844a81ecf28fab2771, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1166,6 +1166,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7540878988852323870, guid: 6c5d833813acd78489ad1ac84a1d96b8, type: 3}
+      propertyPath: BossEnemy
+      value: 
+      objectReference: {fileID: 2709410588033322801, guid: e87aedca768c27741b71008ffb5ce3c2, type: 3}
     - target: {fileID: 7540878988852323870, guid: 6c5d833813acd78489ad1ac84a1d96b8, type: 3}
       propertyPath: enemyPrefab
       value: 
