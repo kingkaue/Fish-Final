@@ -102,4 +102,13 @@ public class CharacterClass_Mage : CharacterClass
         bubbleRb.linearVelocity = direction * bubbleSpeed;
     }
 
+    public void IncreaseFireRate()
+    {
+        fireRate = fireRate - 0.1f;
+    }
+
+    public void IncreaseShotSpeed()
+    {
+        bubbleSpeed++;
+    }
 }
