@@ -601,6 +601,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55956953}
   m_CullTransparentMesh: 1
+--- !u!1 &97193982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8555833260539959901, guid: 98aa329604fb048458b50dbcf2c2ebc7, type: 3}
+  m_PrefabInstance: {fileID: 1423531060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &97193984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97193982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4359a27534785c141808116f9dad2158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &168809389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2602,10 +2619,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: AugmentManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8555833260539959901, guid: 98aa329604fb048458b50dbcf2c2ebc7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8555833260539959901, guid: 98aa329604fb048458b50dbcf2c2ebc7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 97193984}
   m_SourcePrefab: {fileID: 100100000, guid: 98aa329604fb048458b50dbcf2c2ebc7, type: 3}
 --- !u!1 &1452591551
 GameObject:
@@ -3051,7 +3075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7493077042401910077, guid: 1a50c41265abe6f47ae252e8c6d800d8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3636,7 +3660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1852152593387295259, guid: 9a4999648dfb36347a8d514d7cb951a4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8899350227416667334, guid: 9a4999648dfb36347a8d514d7cb951a4, type: 3}
       propertyPath: m_LocalPosition.x

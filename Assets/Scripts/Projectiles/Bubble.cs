@@ -18,6 +18,11 @@ public class Bubble : MonoBehaviour
     [SerializeField] bool isSplit = false;
     [SerializeField] bool isBubbleBurn = false;
 
+    private void Awake()
+    {
+        Destroy(gameObject, 5f);
+    }
+    
     void Update()
     {
         coreDamage = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().attackDamage;

@@ -29,6 +29,7 @@ public class CharacterClass_Rogue : CharacterClass
     public bool bombDrop = false;
     public bool canDropbomb = true;
     [SerializeField] GameObject bomb;
+    public bool canPierce = false;
 
     private void Start()
     {
