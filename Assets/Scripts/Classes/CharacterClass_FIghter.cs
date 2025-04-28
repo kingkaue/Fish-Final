@@ -14,6 +14,8 @@ public class CharacterClass_FIghter : CharacterClass
     public GameObject RightFistHitbox;
     public GameObject LeftFistHitbox;
     private bool canswing = true;
+    private bool isAttacking = false;
+   
     private void Start()
     {
 
@@ -57,46 +59,38 @@ public class CharacterClass_FIghter : CharacterClass
 
     private void Attack()
     {
-        if (isPC)
-        {
-            if (basicAttack.triggered && Time.time >= nextFireTime)
-            {
 
-                if (canswing)
-                {
-                    StartCoroutine(ActivateHitBoxes());
-                    StartCoroutine(ResetAttackAnimation());
-                }
-            }
-        }
-        else
-        {
-            if (basicAttack.triggered && Time.time >= nextFireTime)
-            {
 
-                if (canswing)
-                {
-                    StartCoroutine(ActivateHitBoxes());
-                    StartCoroutine(ResetAttackAnimation());
-                }
-            }
+        if (basicAttack.triggered && !isAttacking && Time.time >= nextFireTime)
+        {
+            StartCoroutine(ActivateHitBoxes());
         }
     }
-
-    private IEnumerator ActivateHitBoxes()
+    // Called via Animation Event at the start of the hit frame
+    private void EnableHitboxes()
     {
-        canswing = false;
-        animator.SetBool("IsPunching", true);
-        yield return new WaitForSeconds(.45f);
-        while (animator.GetBool("IsPunching"))
-        {
-            RightFistHitbox.SetActive(true);
-            LeftFistHitbox.SetActive(true);
-        }
-        nextFireTime = Time.time + fireRate; // Update the next allowed attack time
-        yield return new WaitForSeconds(fireRate); // Duration of hitbox activation
+        RightFistHitbox.SetActive(true);
+        LeftFistHitbox.SetActive(true);
+    }
+
+    // Called via Animation Event at the end of the hit frame
+    private void DisableHitboxes()
+    {
         RightFistHitbox.SetActive(false);
         LeftFistHitbox.SetActive(false);
+    }
+    private IEnumerator ActivateHitBoxes()
+    {
+        isAttacking = true;
+        canswing = false;
+        animator.SetBool("IsPunching", true);
+
+        // Wait for animation to finish
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+
+        animator.SetBool("IsPunching", false);
+        nextFireTime = Time.time + fireRate;
+        isAttacking = false;
         canswing = true;
     }
 }
