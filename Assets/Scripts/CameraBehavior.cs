@@ -22,9 +22,14 @@ public class CameraBehavior : MonoBehaviour
         {
             Vector3 targetPosition = player.position + CamOffset;
 
+            // Clamp the target position within your world bounds
+            targetPosition.x = Mathf.Clamp(targetPosition.x, 23f, 95f);
+            targetPosition.z = Mathf.Clamp(targetPosition.z, 15f, 98f);
+
             transform.position = targetPosition;
 
-            transform.LookAt(player);
+            // Keep camera facing straight without rotating
+            transform.rotation = Quaternion.Euler(45f, 0f, 0f);
         }
     }
 }
