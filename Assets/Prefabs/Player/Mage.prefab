@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mage
       objectReference: {fileID: 0}
+    - target: {fileID: 7105274834985291793, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 21

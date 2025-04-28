@@ -18,6 +18,10 @@ public class CharacterClass_FIghter : CharacterClass
     [Header("Animation Settings")]
     public float animationBlendTime = 0.1f; // Smooth transition time
 
+    [Header ("Augments")]
+    public bool isVampiricStrike = false;
+    public bool canCrit = false;
+
 
     private void Start()
     {
