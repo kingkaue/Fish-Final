@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rogue
       objectReference: {fileID: 0}
+    - target: {fileID: 7105274834985291793, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 21
@@ -392,6 +396,7 @@ MonoBehaviour:
   bombDrop: 0
   canDropbomb: 1
   bomb: {fileID: 8024373681229419238, guid: 5aa44ba93fd7328418175c4c01d2c6ef, type: 3}
+  canPierce: 0
 --- !u!114 &7349703784071301321
 MonoBehaviour:
   m_ObjectHideFlags: 0
