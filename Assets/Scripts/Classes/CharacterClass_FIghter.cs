@@ -15,7 +15,8 @@ public class CharacterClass_FIghter : CharacterClass
     public GameObject LeftFistHitbox;
     private bool canswing = true;
     private bool isAttacking = false;
-   
+    [Header("Animation Settings")]
+    public float animationBlendTime = 0.1f; // Smooth transition time
     private void Start()
     {
 
@@ -81,12 +82,24 @@ public class CharacterClass_FIghter : CharacterClass
     {
         isAttacking = true;
         canswing = false;
+        // Force reset animation state
+        animator.Play("Attack", 0, 0f);
         animator.SetBool("IsPunching", true);
+        yield return new WaitForSeconds(animationBlendTime);
 
+        while (RightFistHitbox.activeSelf || LeftFistHitbox.activeSelf)
+        {
+            yield return null;
+        }
         // Wait for animation to finish
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+            yield return null;
+        }
 
         animator.SetBool("IsPunching", false);
+        yield return new WaitForSeconds(animationBlendTime);
+
         nextFireTime = Time.time + fireRate;
         isAttacking = false;
         canswing = true;
