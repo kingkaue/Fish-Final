@@ -4,121 +4,85 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public float maxEnemies = 1000;
-    private float playerLevell = 1;
     public GameObject enemyPrefab;
     public GameObject enemyPrefab2;
     public float spawnHeightAboveGrid = 1.5f;
     public float spawnRadius = 50f;
     public float spawnDelay = 2f;
-    private GameManager gameManager;
-    private GenerateGrid gridGenerator; // Reference to your grid generator
     public GameObject BossEnemy;
+    private bool bossSpawned = false;
+    private GenerateGrid gridGenerator;
 
     void Start()
     {
-        gameManager = GetComponent<GameManager>();
         gridGenerator = FindObjectOfType<GenerateGrid>();
         if (gridGenerator == null)
         {
             Debug.LogError("No GenerateGrid found in scene!");
             return;
         }
-        
-        StartCoroutine(EnemySpawnerRoutine());
+
+        StartCoroutine(EnemySpawningLoop()); // Start the infinite spawning loop
     }
 
-    private IEnumerator EnemySpawnerRoutine()
+    private IEnumerator EnemySpawningLoop()
     {
-        yield return new WaitUntil(() => gridGenerator.blockPositions.Count > 0); // Wait for grid generation
+        // Wait until the grid is ready
+        yield return new WaitUntil(() => gridGenerator.blockPositions.Count > 0);
 
-        if (GameManager.Instance.playerLevel == 1)
+        // Infinite loop to keep spawning enemies
+        while (true)
         {
-            for (int j = 0; j <= maxEnemies; j++)
+            // Spawn regular enemies based on player level
+            if (GameManager.Instance.playerLevel == 1)
             {
                 SpawnEnemy(enemyPrefab);
-                yield return new WaitForSeconds(spawnDelay);
-
-                if (Random.Range(0, 7) == 5) // 1 in 7 chance
-                {
-                    SpawnEnemy(enemyPrefab2);
-                    yield return new WaitForSeconds(spawnDelay);
-                }
+                if (Random.Range(0, 7) == 5) SpawnEnemy(enemyPrefab2);
             }
-        }
-
-        if (GameManager.Instance.playerLevel == 2)
-        {
-            for (int j = 0; j <= maxEnemies; j++)
+            else if (GameManager.Instance.playerLevel == 2)
             {
                 SpawnEnemy(enemyPrefab);
-                yield return new WaitForSeconds(spawnDelay);
-
-                if (Random.Range(0, 5) == 5) // 1 in 5 chance
-                {
-                    SpawnEnemy(enemyPrefab2);
-                    yield return new WaitForSeconds(spawnDelay - 1f); //spawn delay of 1 seconds as opposed to 2
-                }
+                if (Random.Range(0, 5) == 5) SpawnEnemy(enemyPrefab2);
             }
-        }
-
-        if (GameManager.Instance.playerLevel == 3)
-        {
-            for (int j = 0; j <= maxEnemies; j++)
+            else if (GameManager.Instance.playerLevel >= 4)
             {
                 SpawnEnemy(enemyPrefab);
-                yield return new WaitForSeconds(spawnDelay);
+                if (Random.Range(0, 3) == 3) SpawnEnemy(enemyPrefab2);
 
-                if (Random.Range(0, 3) == 3) // 1 in 5 chance
-                {
-                    SpawnEnemy(enemyPrefab2);
-                    yield return new WaitForSeconds(0.5f); //spawn delay of 0.5 seconds as opposed to 2
-                }
-                if(Random.Range(0, 15) == 15)
+                // Spawn boss ONCE if not already spawned
+                if (!bossSpawned)
                 {
                     SpawnEnemy(BossEnemy);
+                    bossSpawned = true;
+                    Debug.Log("BOSS SPAWNED!");
                 }
             }
+
+            // Wait before next spawn
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
 
     private void SpawnEnemy(GameObject enemyType)
     {
-        // Method 1: Spawn on random grid position (from your existing blockPositions)
         if (gridGenerator.blockPositions.Count > 0)
         {
+            // Spawn on grid positions
             int randomIndex = Random.Range(0, gridGenerator.blockPositions.Count);
             Vector3 spawnPos = gridGenerator.blockPositions[randomIndex];
             spawnPos.y += spawnHeightAboveGrid;
-
-            GameObject enemy = Instantiate(enemyType, spawnPos, Quaternion.identity);
-            SetupEnemyNavMesh(enemy);
+            Instantiate(enemyType, spawnPos, Quaternion.identity);
         }
-        // Method 2: Spawn at random NavMesh location (alternative approach)
         else
         {
+            // Fallback: Spawn randomly in NavMesh area
             Vector3 randomPoint = transform.position + Random.insideUnitSphere * spawnRadius;
-            randomPoint.y = 100f; // Start above terrain
+            randomPoint.y = 100f;
 
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 200f, NavMesh.AllAreas))
             {
-                GameObject enemy = Instantiate(enemyType, hit.position + Vector3.up * spawnHeightAboveGrid, Quaternion.identity);
-                SetupEnemyNavMesh(enemy);
+                Instantiate(enemyType, hit.position + Vector3.up * spawnHeightAboveGrid, Quaternion.identity);
             }
         }
-    }
-
-    private void SetupEnemyNavMesh(GameObject enemy)
-    {
-        NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
-        if (agent == null)
-        {
-            agent = enemy.AddComponent<NavMeshAgent>();
-            agent.baseOffset = spawnHeightAboveGrid;
-        }
-
-        // Add any additional NavMesh setup here
-        agent.speed = Random.Range(3f, 6f);
-        agent.angularSpeed = 120f;
     }
 }
