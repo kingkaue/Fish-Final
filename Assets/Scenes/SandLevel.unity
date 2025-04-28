@@ -1567,7 +1567,7 @@ MonoBehaviour:
   gridoffset: 1.1
   noiseHeight: 1
   blockPositions: []
-  Yoffset: 3.5
+  Yoffset: 0.3
 --- !u!4 &1561082782
 Transform:
   m_ObjectHideFlags: 0
