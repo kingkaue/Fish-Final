@@ -14,7 +14,7 @@ public class GenerateGrid : MonoBehaviour
     public float gridoffset = 1.1f;
     public int noiseHeight = 5;
     public List<Vector3> blockPositions = new List<Vector3>();
-    public float Yoffset = 3.5f;
+    public float Yoffset = 1.25f;
 
     void Start()
     {

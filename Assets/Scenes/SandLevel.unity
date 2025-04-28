@@ -132,15 +132,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8768692615724697248, guid: dbb52585ed1fc1c4f84ab080c887d0e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 73.96419
+      value: 63.4
       objectReference: {fileID: 0}
     - target: {fileID: 8768692615724697248, guid: dbb52585ed1fc1c4f84ab080c887d0e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.04
+      value: 9.34
       objectReference: {fileID: 0}
     - target: {fileID: 8768692615724697248, guid: dbb52585ed1fc1c4f84ab080c887d0e9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 46.33337
+      value: 42.874
       objectReference: {fileID: 0}
     - target: {fileID: 8768692615724697248, guid: dbb52585ed1fc1c4f84ab080c887d0e9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2473,12 +2473,12 @@ MonoBehaviour:
   blockGameObject: {fileID: 4422504758800437625, guid: 9140b25c81fe514458b7efb8fae350b2, type: 3}
   cactus: {fileID: 4399078554278591046, guid: a8a0403b982300749a9f3bc47d90591c, type: 3}
   navMeshSurface: {fileID: 759115437}
-  worldsizeX: 100
-  worldsizeZ: 100
+  worldsizeX: 130
+  worldsizeZ: 130
   gridoffset: 1.1
   noiseHeight: 1
   blockPositions: []
-  Yoffset: 0.3
+  Yoffset: 2.8
 --- !u!4 &1561082782
 Transform:
   m_ObjectHideFlags: 0
@@ -2488,7 +2488,7 @@ Transform:
   m_GameObject: {fileID: 1561082780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1999998, y: 2.2300432, z: 0}
+  m_LocalPosition: {x: -3.4, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3116,6 +3116,14 @@ PrefabInstance:
     - target: {fileID: 2089114549127065156, guid: c1c96040bee0ac44697319daea32c207, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262817034131362973, guid: c1c96040bee0ac44697319daea32c207, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262817034131362973, guid: c1c96040bee0ac44697319daea32c207, type: 3}
+      propertyPath: orthographic size
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
