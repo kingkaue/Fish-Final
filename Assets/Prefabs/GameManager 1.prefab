@@ -9,11 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3842671862867712805}
-  - component: {fileID: 4094259755614011026}
-  - component: {fileID: 412242788758036544}
-  - component: {fileID: 7825986358788974158}
-  - component: {fileID: 7311563097604521640}
   - component: {fileID: 1609893719445725276}
+  - component: {fileID: 2617751582881708736}
   m_Layer: 0
   m_Name: GameManager 1
   m_TagString: Untagged
@@ -36,82 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4094259755614011026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7692039055349544974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: decfbe7c0334d15448cfb28947a27848, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coralPrefab: {fileID: 9222736351342809352, guid: 92584dd7b56801544a9ab7fa3ce517f3, type: 3}
-  player: {fileID: 0}
-  targetPlane: {fileID: 0}
-  spawnRadius: 60
-  despawnRadius: 60
-  maxCoralsPerChunk: 4
-  yPadding: 5
-  xpadding: 3
---- !u!114 &412242788758036544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7692039055349544974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67120af809d0ed24b81fbdc12c9c2b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planeChunkPrefab: {fileID: 0}
-  player: {fileID: 0}
-  chunkSize: 10
-  renderDistance: 3
---- !u!114 &7825986358788974158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7692039055349544974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: decfbe7c0334d15448cfb28947a27848, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coralPrefab: {fileID: 8003554431850327796, guid: b8605ab83b00c1e408a566e74c405756, type: 3}
-  player: {fileID: 0}
-  targetPlane: {fileID: 0}
-  spawnRadius: 60
-  despawnRadius: 60
-  maxCoralsPerChunk: 1
-  yPadding: 1
-  xpadding: 2
---- !u!114 &7311563097604521640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7692039055349544974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: decfbe7c0334d15448cfb28947a27848, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coralPrefab: {fileID: 452860116380826463, guid: 777736fdf17f2224183fe8ab23e344e7, type: 3}
-  player: {fileID: 0}
-  targetPlane: {fileID: 0}
-  spawnRadius: 60
-  despawnRadius: 60
-  maxCoralsPerChunk: 1
-  yPadding: 7.5
-  xpadding: 5
 --- !u!114 &1609893719445725276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +46,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 0}
+--- !u!114 &2617751582881708736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692039055349544974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7109e45164e240499ae05d1bb738f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 0}
+  EnemyPrefab: {fileID: 257502094617183370, guid: 458ac2ef40895a14facf67d6416636c6, type: 3}
+  timer: 0
+  xp: 0
+  nextLevelXP: 100
+  playerLevel: 1
+  levelXPMult: 1.5
+  CurrentPlayer: {fileID: 0}

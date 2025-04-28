@@ -129,6 +129,7 @@ public class PlayerManager : MonoBehaviour
     public void SetHealthMultiplier(float healthMultiplierAdd)
     {
         healthMultiplier = healthMultiplier * healthMultiplierAdd;
+        MultiplyMaxHealth(healthMultiplier);
     }
 
     public void MultiplyMaxHealth(float healthmult)
@@ -201,9 +202,7 @@ public class PlayerManager : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
-        }
+        Debug.Log("Ignored Collision");
+        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
     }
 }

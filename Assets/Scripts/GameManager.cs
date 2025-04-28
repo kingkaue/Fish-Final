@@ -110,13 +110,6 @@ public class GameManager : MonoBehaviour
     {
         playerLevel++;
 
-        if (playerLevel % 5 == 0)
-        {
-            AddAugment();
-            Debug.Log("The Player has gained an augment!");
-        }
-            
-
         nextLevelXP += (int)(nextLevelXP * levelXPMult);
 
         // Fire event:

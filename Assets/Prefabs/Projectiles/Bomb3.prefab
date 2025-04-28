@@ -126,7 +126,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
@@ -145,4 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 1.5
   blastRadius: 5
-  explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+  explosionEffect: {fileID: 1121192042590650, guid: 7cf5a568b8c8fb644a7fb51ed686c14c, type: 3}

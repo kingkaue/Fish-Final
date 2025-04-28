@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 3577448619192058015}
   - component: {fileID: 7518943323744453142}
   - component: {fileID: 3934141536566160854}
+  - component: {fileID: 4374580419012370847}
   m_Layer: 0
   m_Name: UI Manager
   m_TagString: Untagged
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupGroup: {fileID: 0}
+  augmentGroup: {fileID: 0}
 --- !u!114 &3934141536566160854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,3 +125,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 0}
+--- !u!114 &4374580419012370847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543230700673457677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7332222983feaae4f875cd9606c05a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableAugmentButtons: []
+  allAugmentButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
