@@ -59,8 +59,6 @@ public class CharacterClass_FIghter : CharacterClass
 
     private void Attack()
     {
-
-
         if (basicAttack.triggered && !isAttacking && Time.time >= nextFireTime)
         {
             StartCoroutine(ActivateHitBoxes());
