@@ -1,41 +1,16 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
+using TMPro;            // if you’re using TextMeshPro
+// using UnityEngine.UI; // if you’re using UI.Text instead
 
 public class GameOverUI : MonoBehaviour
 {
-    [Header("Assign in Inspector")]
     [SerializeField] private TextMeshProUGUI finalScoreText;
-
-    void Awake()
-    {
-        // Subscribe early
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    // [SerializeField] private Text finalScoreText; // if you use UI.Text
 
     void Start()
     {
-        // In case we started in the GameOver scene (and missed the callback)
-        if (SceneManager.GetActiveScene().name == "GameOver")
-            DisplayFinalScore();
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "GameOver")
-            DisplayFinalScore();
-    }
-
-    private void DisplayFinalScore()
-    {
-        int xp = GameManager.Instance != null
-              ? GameManager.Instance.GetXP()
-              : 0;
+        // pull the XP we stashed in RunData
+        int xp = RunData.FinalXP;
 
         if (finalScoreText != null)
             finalScoreText.text = $"Final Score\n{xp}";

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
@@ -23,12 +24,18 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
             InitializeGame();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void InitializeGame()
@@ -98,11 +105,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Menu")
+        {
+            // zero out run data when you go back to Menu
+            xp = 0;
+            RunData.Reset();
+        }
+    }
+
     public void AddXP(int amount)
     {
         xp += amount;
-        DisplayXP();
+        // keep RunData in sync
+        RunData.FinalXP = xp;
 
+        DisplayXP();
         CheckLevelUp();
     }
 
