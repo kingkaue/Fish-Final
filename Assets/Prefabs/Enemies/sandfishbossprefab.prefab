@@ -366,6 +366,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de36bea1de22ae940a9165e87019dc67, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8580231541915848279}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de36bea1de22ae940a9165e87019dc67, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 21490950467439077}
   m_SourcePrefab: {fileID: 100100000, guid: de36bea1de22ae940a9165e87019dc67, type: 3}
 --- !u!4 &4852546850985655218 stripped
 Transform:
@@ -477,3 +480,19 @@ MonoBehaviour:
   HealthBar: {fileID: 7972092767562479869}
   CollectableDrop: {fileID: 0}
   stoppingDistance: 1.5
+  audioSource: {fileID: 0}
+  hitSound: {fileID: 0}
+--- !u!114 &21490950467439077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5196139164613009672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6244d5844156d14ba3b1fa11ba64ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverSceneName: Game Over
+  bossStats: {fileID: -8580231541915848279}

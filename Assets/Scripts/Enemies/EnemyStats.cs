@@ -18,6 +18,10 @@ public class EnemyStats : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float stoppingDistance = 1.5f;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip hitSound;
+
     // Properties for safe access
     public float CurrentHealth
     {
@@ -42,6 +46,15 @@ public class EnemyStats : MonoBehaviour
 
     private void InitializeComponents()
     {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
+
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
 
@@ -66,15 +79,26 @@ public class EnemyStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log($"TakeDamage called on {gameObject.name} with damage: {damage}");
+
         if (_isDying) return;
 
         CurrentHealth -= damage;
+
+        if (hitSound != null && audioSource != null)
+        {
+            Debug.Log($"Playing hit sound: {hitSound.name}, Volume: {audioSource.volume}");
+
+            audioSource.PlayOneShot(hitSound);
+        }
 
         // Trigger hit animation if needed
         if (_animator != null)
         {
             _animator.SetTrigger("Hit");
         }
+
+
     }
 
     private IEnumerator Die()
