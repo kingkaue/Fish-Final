@@ -1,13 +1,13 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     [Header("Game Over Settings")]
     [SerializeField] private string gameOverSceneName = "Game Over";
     private bool _hasDied = false;
+    public bool isLoaded = false;
 
     [System.Serializable]
     public class PlayerState
@@ -24,11 +24,11 @@ public class PlayerManager : MonoBehaviour
 
     private void CheckDeath()
     {
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && isLoaded && !_hasDied)
         {
+            _hasDied = true;
             OnPlayerDeath?.Invoke();
             SceneManager.LoadScene(gameOverSceneName);
-
         }
     }
     public PlayerState GetPlayerState()
@@ -80,7 +80,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Player Health is " + currentHealth);
+        Debug.Log("Player Health on Start: " + currentHealth);
 
         //set default mult values
         damageMultiplier = 1.0f;
@@ -88,12 +88,19 @@ public class PlayerManager : MonoBehaviour
         healthMultiplier = 1f;
 
         //find stats ui in scene
-        healthMultUI = GameObject.Find("Health Multiplier UI").GetComponent<TMP_Text>();
-        damageMultUI = GameObject.Find("Damage Multiplier UI").GetComponent<TMP_Text>();
-        speedMultUI = GameObject.Find("Speed Multiplier UI").GetComponent<TMP_Text>();
+        healthMultUI = GameObject.Find("Health Multiplier UI")?.GetComponent<TMP_Text>();
+        damageMultUI = GameObject.Find("Damage Multiplier UI")?.GetComponent<TMP_Text>();
+        speedMultUI = GameObject.Find("Speed Multiplier UI")?.GetComponent<TMP_Text>();
 
         //update stats UI
         UpdateStatsUI();
+
+        // Initialize health if not loaded (for new game starts)
+        if (!isLoaded)
+        {
+            InitializeHealth(baseMaxHealth); // Or however you initialize default health
+            isLoaded = true; // Mark as loaded after initialization for a new game
+        }
     }
 
     void Update()
@@ -104,13 +111,14 @@ public class PlayerManager : MonoBehaviour
             currentHealth = currentMaxHealth;
         }
 
-        if (currentHealth <= 0)
+        // Check for game over ONLY if the game has been loaded
+        if (isLoaded && currentHealth == 1 && !_hasDied)
         {
+            _hasDied = true; // Prevent multiple game over calls
             SceneManager.LoadScene(gameOverSceneName);
-
-            Debug.Log("Player Health is dead");
+            Debug.Log("Player Health is dead (after load)");
             OnPlayerDeath?.Invoke();
-            Destroy(this.gameObject);
+            Destroy(gameObject); // Consider if you want to destroy the player immediately
         }
     }
 
@@ -154,6 +162,7 @@ public class PlayerManager : MonoBehaviour
         baseMaxHealth = classHealth;
         currentMaxHealth = classHealth;
         currentHealth = classHealth;
+        Debug.Log("Initial Health set to: " + currentHealth);
     }
 
     public void SetHealthMultiplier(float healthMultiplierAdd)
@@ -250,6 +259,4 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Ignored Collision");
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
     }
-
-   
 }

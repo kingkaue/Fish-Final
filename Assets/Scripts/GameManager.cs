@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
+
     public GameObject playerPrefab, EnemyPrefab;
     GameObject enemyParent;
     public float timer;
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public int nextLevelXP = 100;
     public int playerLevel = 1;
     public float levelXPMult = 1.5f;
-    public GameObject CurrentPlayer;
+    public GameObject CurrentPlayer { get; private set; } // Make setter private
 
     public event Action<int> OnLeveledUp;
 
@@ -33,6 +33,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Find the player in Start to ensure the scene is fully loaded
+        FindPlayer();
+        DisplayXP();
+        Debug.Log($"GameManager Start - Player Level: {playerLevel}, XP: {xp}, Next Level XP: {nextLevelXP}"); // Debug log
+    }
+
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -41,14 +49,30 @@ public class GameManager : MonoBehaviour
     void InitializeGame()
     {
         enemyParent = new GameObject("Enemies");
-        SpawnPlayer(new Vector3(0, 1, 0));
-        // Any other initialization code
+        // Consider instantiating the player here if it's not always loaded
+        // if (CurrentPlayer == null && playerPrefab != null && SceneManager.GetActiveScene().name != "Menu")
+        // {
+        //     CurrentPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        //     CurrentPlayer.tag = "Player"; // Ensure it has the correct tag
+        // }
     }
 
-
-    void Start()
+    void FindPlayer()
     {
-        DisplayXP();
+        if (CurrentPlayer == null)
+        {
+            CurrentPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (CurrentPlayer == null && SceneManager.GetActiveScene().name != "Menu" && playerPrefab != null)
+            {
+                Debug.LogWarning("Player not found in scene, attempting to instantiate.");
+                CurrentPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                CurrentPlayer.tag = "Player";
+            }
+            else if (CurrentPlayer == null && SceneManager.GetActiveScene().name != "Menu")
+            {
+                Debug.LogError("Player with tag 'Player' not found in the scene!");
+            }
+        }
     }
 
     void Update()
@@ -57,34 +81,10 @@ public class GameManager : MonoBehaviour
         //Debug.Log(timer);
     }
 
-    public void SpawnPlayer(Vector3 position)
-    {
-        if (playerPrefab != null)
-        {
-            // Destroy existing player if one exists
-            if (CurrentPlayer != null)
-            {
-                Destroy(CurrentPlayer);
-            }
-
-            CurrentPlayer = Instantiate(playerPrefab, position, Quaternion.identity);
-            CurrentPlayer.name = "Player";
-            CurrentPlayer.tag = "Player";
-            Debug.Log($"Player spawned at: {position}");
-        }
-        else
-        {
-            Debug.LogError("Player prefab not assigned in GameManager!");
-        }
-
-    }
-
     void SpawnEnemy()
     {
-        //GameObject enemy =  Instantiate(playerPrefab, new Vector3(Random.Range(-20f,20f), 1, Random.Range(-20f, 20f)), Quaternion.identity);
         GameObject enemy = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         enemy.transform.parent = enemyParent.transform;
-
         enemy.transform.position = new Vector3(UnityEngine.Random.Range(-20f, 20f), 0.5f, UnityEngine.Random.Range(-20f, 20f));
     }
 
@@ -107,20 +107,22 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        FindPlayer(); // Ensure player is found after each scene load
         if (scene.name == "Menu")
         {
-            // zero out run data when you go back to Menu
             xp = 0;
-            RunData.Reset();
+            playerLevel = 1;
+            nextLevelXP = 100;
+            Debug.Log("GameManager - Resetting player level and XP for Menu.");
+            // RunData.Reset(); // Assuming RunData is another script you have
         }
+        Debug.Log($"Scene Loaded: {scene.name} - Player Level: {playerLevel}, XP: {xp}, Next Level XP: {nextLevelXP}"); // Debug log
     }
 
     public void AddXP(int amount)
     {
         xp += amount;
-        // keep RunData in sync
-        RunData.FinalXP = xp;
-
+        // RunData.FinalXP = xp;
         DisplayXP();
         CheckLevelUp();
     }
@@ -128,14 +130,10 @@ public class GameManager : MonoBehaviour
     void LevelUp()
     {
         playerLevel++;
-
         nextLevelXP += (int)(nextLevelXP * levelXPMult);
-
-        // Fire event:
         OnLeveledUp?.Invoke(playerLevel);
-
         CheckLevelUp();
-        Debug.Log("The Player has leveled up!");
+        Debug.Log("The Player has leveled up! New Level: " + playerLevel);
     }
 
     void CheckLevelUp()
@@ -157,10 +155,6 @@ public class GameManager : MonoBehaviour
     {
         // TODO
     }
-
-    //track character selection
-
-    //save state
 
     public class GameState
     {

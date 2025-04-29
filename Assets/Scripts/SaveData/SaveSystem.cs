@@ -42,11 +42,14 @@ public class SaveSystem : MonoBehaviour
     private string savePath;
     private GameData currentGameData;
     private bool isLoading = false;
+    private bool loadingComplete = false; // Flag to track if loading is done
 
     private void Awake()
     {
         if (Instance == null)
         {
+            Debug.Log("savesystem Awake - Initial instance created and marked DontDestroyOnLoad.");
+
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -54,6 +57,8 @@ public class SaveSystem : MonoBehaviour
         }
         else
         {
+            Debug.Log("savesystem Awake - Duplicate instance detected, destroying self.");
+
             Destroy(gameObject);
         }
     }
@@ -67,9 +72,21 @@ public class SaveSystem : MonoBehaviour
     {
         if (isLoading && currentGameData != null && scene.name == currentGameData.playerData.currentScene)
         {
-            CompleteLoading();
+            // Wait one frame to ensure all objects in the scene are initialized
+            StartCoroutine(DelayedCompleteLoading());
             isLoading = false;
         }
+        else if (!isLoading && loadingComplete)
+        {
+            // This might be needed if you load a new scene without loading a save
+            loadingComplete = false;
+        }
+    }
+
+    private System.Collections.IEnumerator DelayedCompleteLoading()
+    {
+        yield return null; // Wait one frame
+        CompleteLoading();
     }
 
     public void SaveGame()
@@ -148,7 +165,7 @@ public class SaveSystem : MonoBehaviour
             }
             else
             {
-                CompleteLoading();
+                StartCoroutine(DelayedCompleteLoading());
             }
         }
         catch (System.Exception e)
@@ -162,30 +179,28 @@ public class SaveSystem : MonoBehaviour
         if (currentGameData == null) return;
 
         // Load player
-        GameManager.Instance.SpawnPlayer(currentGameData.playerData.playerPosition);
         LoadPlayerData();
-        // Load player with saved position
-        if (GameManager.Instance.CurrentPlayer == null)
-        {
-            GameManager.Instance.SpawnPlayer(currentGameData.playerData.playerPosition);
-        }
-        else
-        {
-            GameManager.Instance.CurrentPlayer.transform.position = currentGameData.playerData.playerPosition;
-        }
+
         // Load enemies
         ClearExistingEnemies();
         SpawnSavedEnemies();
 
+        loadingComplete = true;
         Debug.Log("Game loaded successfully");
     }
 
     private void LoadPlayerData()
     {
         var player = GameManager.Instance.CurrentPlayer;
-        if (player == null) return;
+        if (player == null)
+        {
+            Debug.LogError("Player not found in the scene during LoadPlayerData!");
+            return;
+        }
 
-        player.transform.position = currentGameData.playerData.playerPosition;
+        Vector3 loadedPosition = currentGameData.playerData.playerPosition;
+        loadedPosition.y += 1f;
+        player.transform.position = loadedPosition;
 
         var playerManager = player.GetComponent<PlayerManager>();
         if (playerManager != null)
@@ -193,11 +208,27 @@ public class SaveSystem : MonoBehaviour
             playerManager.currentHealth = currentGameData.playerData.currentHealth;
             playerManager.currentMaxHealth = currentGameData.playerData.maxHealth;
             SetPlayerClass(currentGameData.playerData.selectedClass);
+            playerManager.isLoaded = true;
+            Debug.Log($"Loaded Player Health: {playerManager.currentHealth}");
+            Debug.Log($"Loaded Player Position: {player.transform.position}");
+        }
+        else
+        {
+            Debug.LogError("PlayerManager component not found on the player!");
         }
 
-        GameManager.Instance.playerLevel = currentGameData.playerData.playerLevel;
-        GameManager.Instance.xp = currentGameData.playerData.xp;
-        GameManager.Instance.nextLevelXP = currentGameData.playerData.nextLevelXP;
+        // **Crucially, set the GameManager's level and XP here**
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.playerLevel = currentGameData.playerData.playerLevel;
+            GameManager.Instance.xp = currentGameData.playerData.xp;
+            GameManager.Instance.nextLevelXP = currentGameData.playerData.nextLevelXP;
+            Debug.Log($"Loaded Player Level: {GameManager.Instance.playerLevel}, XP: {GameManager.Instance.xp}, Next Level XP: {GameManager.Instance.nextLevelXP}"); // Debug log
+        }
+        else
+        {
+            Debug.LogError("GameManager Instance is null during LoadPlayerData!");
+        }
     }
 
     private void ClearExistingEnemies()
@@ -289,6 +320,9 @@ public class SaveSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
+            Debug.Log($"GameManager Instance: {GameManager.Instance}");
+            Debug.Log($"GameManager CurrentPlayer: {GameManager.Instance?.CurrentPlayer}");
+            SaveSystem.Instance.SaveGame();
             SaveGame();
             Debug.Log("Saved Game");
         }
