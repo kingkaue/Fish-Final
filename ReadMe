@@ -1,0 +1,22 @@
+Description
+Fishfight is a game that features dynamic gameplay and player progression in a fast-paced, engaging format. 
+
+Key Features and Contributions
+Designed and programmed procedural level generation for dynamic gameplay experiences.
+
+Implemented a player progression and leveling system in a Vampire Survivors-inspired format.
+
+Collaborated in a small team to create a complete gameplay loop, from core mechanics to win conditions.
+
+Technical Details
+Procedural Level Generation: Developed algorithms and systems to create unique and varied levels each playthrough. This ensures high replayability and keeps the gameplay experience fresh and engaging.
+
+Player Progression and Leveling System: Implemented a system that allows players to grow more powerful over time, inspired by the popular Vampire Survivors format. This includes designing progression trees, implementing stat upgrades, and balancing the system for a satisfying gameplay loop.
+
+Complete Gameplay Loop: Worked with a small team to define and implement all aspects of the game, including:
+
+Core mechanics: Designing the fundamental actions and interactions within the game.
+
+Gameplay flow: Structuring how the player progresses through the game.
+
+Win conditions: Defining the objectives and how the player achieves victory.
