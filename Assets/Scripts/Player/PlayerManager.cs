@@ -2,9 +2,12 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
+    [Header("Game Over Settings")]
+    [SerializeField] private string gameOverSceneName = "Game Over";
+    private bool _hasDied = false;
 
     [System.Serializable]
     public class PlayerState
@@ -24,7 +27,8 @@ public class PlayerManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             OnPlayerDeath?.Invoke();
-            // Handle death (respawn or game over)
+            SceneManager.LoadScene(gameOverSceneName);
+
         }
     }
     public PlayerState GetPlayerState()
@@ -102,6 +106,8 @@ public class PlayerManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            SceneManager.LoadScene(gameOverSceneName);
+
             Debug.Log("Player Health is dead");
             OnPlayerDeath?.Invoke();
             Destroy(this.gameObject);
@@ -244,4 +250,6 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Ignored Collision");
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.gameObject.GetComponent<Collider>());
     }
+
+   
 }
