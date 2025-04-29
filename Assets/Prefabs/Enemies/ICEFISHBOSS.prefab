@@ -490,9 +490,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyType: BasicEnemy
-  MaxHealth: 10
+  MaxHealth: 150
   _currentHealth: 0
-  HealthBar: {fileID: 0}
+  HealthBar: {fileID: 3366624687625768343}
   CollectableDrop: {fileID: 0}
   stoppingDistance: 1.5
   audioSource: {fileID: 0}
