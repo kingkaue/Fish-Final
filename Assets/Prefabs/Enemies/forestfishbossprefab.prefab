@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyType: BasicEnemy
   MaxHealth: 150
-  _currentHealth: 0
+  _currentHealth: 150
   HealthBar: {fileID: 6064019517397866769}
   CollectableDrop: {fileID: 0}
   stoppingDistance: 1.5
