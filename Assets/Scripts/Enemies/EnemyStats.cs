@@ -81,6 +81,8 @@ public class EnemyStats : MonoBehaviour
     {
         Debug.Log($"TakeDamage called on {gameObject.name} with damage: {damage}");
 
+
+
         if (_isDying) return;
 
         CurrentHealth -= damage;

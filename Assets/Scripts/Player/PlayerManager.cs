@@ -220,7 +220,7 @@ public class PlayerManager : MonoBehaviour
 
             currentHealth = currentHealth - damage;
             OnPlayerDamaged?.Invoke(damage, currentHealth, currentMaxHealth);
-            StartCoroutine(InvincibilityFrames(0.25f));
+            StartCoroutine(InvincibilityFrames(0.05f));
         }
         catch (System.ArgumentException ex)
         {
