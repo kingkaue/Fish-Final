@@ -378,6 +378,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8f8e8af3c9819814598be61f3b53d3d7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6372457515124913148}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8f8e8af3c9819814598be61f3b53d3d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -961936537698123640}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8f8e8af3c9819814598be61f3b53d3d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4052817271269100060}
   m_SourcePrefab: {fileID: 100100000, guid: 8f8e8af3c9819814598be61f3b53d3d7, type: 3}
 --- !u!4 &4828716797436638091 stripped
 Transform:
@@ -483,8 +489,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98827bc4621e1454eafd8c210640b313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
+  EnemyType: BasicEnemy
+  MaxHealth: 10
   _currentHealth: 0
-  _healthbar: {fileID: 3366624687625768343}
-  collectable: {fileID: 0}
+  HealthBar: {fileID: 0}
+  CollectableDrop: {fileID: 0}
   stoppingDistance: 1.5
+  audioSource: {fileID: 0}
+  hitSound: {fileID: 0}
+--- !u!114 &-961936537698123640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208655941303298353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6244d5844156d14ba3b1fa11ba64ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverSceneName: GameOverScene
+  bossStats: {fileID: 0}
+--- !u!114 &4052817271269100060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208655941303298353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6244d5844156d14ba3b1fa11ba64ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverSceneName: Game Over
+  bossStats: {fileID: 6372457515124913148}
