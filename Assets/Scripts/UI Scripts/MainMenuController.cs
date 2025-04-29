@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
 
-    public CanvasGroup OptionPanel;
     public CanvasGroup LevelSelect;
 
     public void PlayGame()
@@ -31,15 +30,11 @@ public class MainMenuController : MonoBehaviour
 
     public void Option()
     {
-        OptionPanel.alpha = 1;
-        OptionPanel.interactable = true;
-        OptionPanel.blocksRaycasts = true;
+        // TODO LOAD STATE
     }
     public void Back()
     {
-        OptionPanel.alpha = 0;
-        OptionPanel.blocksRaycasts = false;
-        OptionPanel.interactable = false;
+
         LevelSelect.alpha = 0;
         LevelSelect.blocksRaycasts = false;
         LevelSelect.interactable = false;
