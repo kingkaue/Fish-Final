@@ -129,6 +129,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Current XP: " + xp);
     }
 
+    public int GetXP()
+    {
+        return xp;
+    }
+
     void AddAugment()
     {
         // TODO
