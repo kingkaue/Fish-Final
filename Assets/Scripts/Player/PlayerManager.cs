@@ -76,6 +76,7 @@ public class PlayerManager : MonoBehaviour
     public TMP_Text healthMultUI;
     public TMP_Text damageMultUI;
     public TMP_Text speedMultUI;
+    public TMP_Text currentHealthUI;
 
 
     void Start()
@@ -91,6 +92,7 @@ public class PlayerManager : MonoBehaviour
         healthMultUI = GameObject.Find("Health Multiplier UI")?.GetComponent<TMP_Text>();
         damageMultUI = GameObject.Find("Damage Multiplier UI")?.GetComponent<TMP_Text>();
         speedMultUI = GameObject.Find("Speed Multiplier UI")?.GetComponent<TMP_Text>();
+        currentHealthUI = GameObject.Find("Health UI")?.GetComponent<TMP_Text>();
 
         //update stats UI
         UpdateStatsUI();
@@ -244,6 +246,7 @@ public class PlayerManager : MonoBehaviour
         healthMultUI.text = $"Health Mult: {healthMultiplier}x";
         damageMultUI.text = $"Damage Mult: {damageMultiplier}x";
         speedMultUI.text = $"Speed Mult: {speedMultiplier}x";
+        currentHealthUI.text = $"Health: {currentHealth}";
         //Debug.Log("Updated stats ui");
     }
 

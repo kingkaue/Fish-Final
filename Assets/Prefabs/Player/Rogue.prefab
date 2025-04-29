@@ -80,6 +80,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1344551611585959222, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344551611585959222, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
@@ -91,13 +95,17 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3458333666414785056, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7105274834985291793, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_Name
       value: Rogue
       objectReference: {fileID: 0}
     - target: {fileID: 7105274834985291793, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7863775814654330459, guid: f39f133137e30bd4a9ae863595b1089d, type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -409,6 +417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2740fffb36c2a9f488b4407223cf0e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverSceneName: Game Over
+  isLoaded: 0
   className: 
   baseMaxHealth: 0
   currentMaxHealth: 0
@@ -418,6 +428,11 @@ MonoBehaviour:
   attackDamage: 0
   damageMultiplier: 0
   isInvincible: 0
+  speedMultiplier: 0
+  healthMultUI: {fileID: 0}
+  damageMultUI: {fileID: 0}
+  speedMultUI: {fileID: 0}
+  currentHealthUI: {fileID: 0}
 --- !u!54 &6191383920527109701
 Rigidbody:
   m_ObjectHideFlags: 0

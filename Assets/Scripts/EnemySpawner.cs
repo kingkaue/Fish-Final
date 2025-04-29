@@ -44,7 +44,20 @@ public class EnemySpawner : MonoBehaviour
                 SpawnEnemy(enemyPrefab);
                 if (Random.Range(0, 5) == 5) SpawnEnemy(enemyPrefab2);
             }
-            else if (GameManager.Instance.playerLevel >= 4)
+
+            else if (GameManager.Instance.playerLevel == 3)
+            {
+                SpawnEnemy(enemyPrefab);
+                if (Random.Range(0, 5) == 5) SpawnEnemy(enemyPrefab2);
+            }
+
+            else if (GameManager.Instance.playerLevel == 4)
+            {
+                SpawnEnemy(enemyPrefab);
+                if (Random.Range(0, 5) == 5) SpawnEnemy(enemyPrefab2);
+            }
+
+            else if (GameManager.Instance.playerLevel >= 5)
             {
                 SpawnEnemy(enemyPrefab);
                 if (Random.Range(0, 3) == 3) SpawnEnemy(enemyPrefab2);

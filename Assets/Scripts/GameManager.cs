@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
             playerLevel = 1;
             nextLevelXP = 100;
             Debug.Log("GameManager - Resetting player level and XP for Menu.");
-            // RunData.Reset(); // Assuming RunData is another script you have
+            RunData.Reset(); 
         }
         Debug.Log($"Scene Loaded: {scene.name} - Player Level: {playerLevel}, XP: {xp}, Next Level XP: {nextLevelXP}"); // Debug log
     }
