@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1609893719445725276}
   - component: {fileID: 2617751582881708736}
   - component: {fileID: 5391991128541849106}
+  - component: {fileID: 2942479954429567272}
   m_Layer: 0
   m_Name: GameManager 1
   m_TagString: Untagged
@@ -80,3 +81,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs: []
+--- !u!114 &2942479954429567272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692039055349544974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d66879b524aeb784694631839a451ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuSceneName: Menu

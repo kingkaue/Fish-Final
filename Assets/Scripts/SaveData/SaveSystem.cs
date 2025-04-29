@@ -287,13 +287,13 @@ public class SaveSystem : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             SaveGame();
             Debug.Log("Saved Game");
         }
 
-        if (Input.GetKeyDown(KeyCode.F9))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             LoadGame();
             Debug.Log("Loaded Game");
